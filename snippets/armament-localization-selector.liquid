@@ -33,7 +33,7 @@
 
         </select>
       </div>
-      {% render 'armament-button' with content: 'Update country/region', data_aid="noscript-country-button", classes: 'md:mt-2' %}
+      {% render 'armament-button' with content, content: 'Update country/region', classes: 'md:mt-2' %}
     {%- endform -%}
   </noscript>
 
@@ -44,7 +44,7 @@
           <button type="button" class="flex flex-nowrap items-center group" aria-expanded="false" aria-controls="CountryList" data-aid="country-selector-button">
 
             <span>{{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})</span>
-            {% render 'armament-icon' with icon: 'arrow-right', classes: 'rotate-90 ml-2', attributes: 'style="width:10px;height:10px"', no_animation: true %}
+            {% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'rotate-90 ml-2', attributes: 'style="width:10px;height:10px"', no_animation: true %}
 
           </button>
 
@@ -96,7 +96,7 @@
         </select>
 
       </div>
-      {% render 'armament-button' with content: 'Update language', data_aid="noscript-language-button", classes: 'md:mt-2' %}
+      {% render 'armament-button' with content, content: 'Update language', classes: 'md:mt-2' %}
     {%- endform -%}
   </noscript>
 
@@ -107,7 +107,7 @@
           <button type="button" class="flex flex-nowrap items-center group" aria-expanded="false" aria-controls="LanguageList" data-aid="language-selector-button">
 
             <span>{{ localization.language.endonym_name | capitalize }}</span>
-            {% render 'armament-icon' with icon: 'arrow-right', classes: 'rotate-90 ml-2', attributes: 'style="width:10px;height:10px"', no_animation: true %}
+            {% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'rotate-90 ml-2', attributes: 'style="width:10px;height:10px"', no_animation: true %}
 
           </button>
 
@@ -137,4 +137,30 @@
   <safe-load-scripts>
     <script src="{{ 'component-armament-localization-form.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="localization-form"></script>
   </safe-load-scripts>
-{%- endif -%}
+{%- endif -%}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% render ''armament-button'' with content: ''Update country/region'', data_aid="noscript-country-button",
+    classes: ''md:mt-2'' %}'
+  to: "{% render 'armament-button' with content, content: 'Update country/region',
+    classes: 'md:mt-2' %}"
+  position: 1648..1745
+- from: '{% render ''armament-icon'' with icon: ''arrow-right'', classes: ''rotate-90
+    ml-2'', attributes: ''style="width:10px;height:10px"'', no_animation: true %}'
+  to: '{% render ''armament-icon'' with icon, icon: ''arrow-right'', classes: ''rotate-90
+    ml-2'', attributes: ''style="width:10px;height:10px"'', no_animation: true %}'
+  position: 2425..2577
+- from: '{% render ''armament-button'' with content: ''Update language'', data_aid="noscript-language-button",
+    classes: ''md:mt-2'' %}'
+  to: "{% render 'armament-button' with content, content: 'Update language', classes:
+    'md:mt-2' %}"
+  position: 5097..5188
+- from: '{% render ''armament-icon'' with icon: ''arrow-right'', classes: ''rotate-90
+    ml-2'', attributes: ''style="width:10px;height:10px"'', no_animation: true %}'
+  to: '{% render ''armament-icon'' with icon, icon: ''arrow-right'', classes: ''rotate-90
+    ml-2'', attributes: ''style="width:10px;height:10px"'', no_animation: true %}'
+  position: 5786..5938
+{%- endcomment -%}

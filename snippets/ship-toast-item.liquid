@@ -8,11 +8,11 @@
 >
   <div class="flex justify-between items-center">
     <div class="flex items-center opacity-0" data-armada-selector="toast-animate-heading">
-      {% render 'armament-icon' with icon: icon, classes: 'mr-2' %}
-      {% render 'armament-heading' with tag: 'h2', heading_type: 'heading-5', attributes: 'data-armada-selector="toast-heading"' %}
+      {% render 'armament-icon' with icon, icon: icon, classes: 'mr-2' %}
+      {% render 'armament-heading' with tag, tag: 'h2', heading_type: 'heading-5', attributes: 'data-armada-selector="toast-heading"' %}
     </div>
     <button type="button" aria-label="Close toast" class="w-44 h-44 flex justify-center items-center absolute top-0 right-0 md:top-2 md:right-2 group{% if type == 'form-submit' %} outline-0{% endif %}" data-armada-selector="toast-close">
-      {% render 'armament-icon' with icon: 'cancel' %}
+      {% render 'armament-icon' with icon, icon: 'cancel' %}
     </button>
   </div>
   <div data-armada-selector="toast-animate-content" class="opacity-0">
@@ -22,7 +22,7 @@
       <div class="pt-3">
         <div data-armada-selector="toast-cart-item"></div>
         {% assign goToCart = 'products.product.go_to_cart' | t %}
-        {% render 'armament-button' with url: routes.cart_url, content: goToCart, classes: 'w-full' %}
+        {% render 'armament-button' with url, url: routes.cart_url, content: goToCart, classes: 'w-full' %}
       </div>
     {% endif %}
   </div>
@@ -30,7 +30,35 @@
     {% if type == 'error' or type == 'email' %}
       <div class="h-1" style="background-color:{% if color %}{{ color }}{% else %}red{% endif %}"></div>
     {% else %}
-      {% render 'armament-progress-bar' with interval: duration, play: "false" %}
+      {% render 'armament-progress-bar' with interval, interval: duration, play: "false" %}
     {% endif %}
   </div>
 </toast-item>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-icon' with icon: icon, classes: 'mr-2' %}"
+  to: "{% render 'armament-icon' with icon, icon: icon, classes: 'mr-2' %}"
+  position: 397..464
+- from: '{% render ''armament-heading'' with tag: ''h2'', heading_type: ''heading-5'',
+    attributes: ''data-armada-selector="toast-heading"'' %}'
+  to: '{% render ''armament-heading'' with tag, tag: ''h2'', heading_type: ''heading-5'',
+    attributes: ''data-armada-selector="toast-heading"'' %}'
+  position: 471..601
+- from: "{% render 'armament-icon' with icon: 'cancel' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'cancel' %}"
+  position: 857..911
+- from: "{% render 'armament-button' with url: routes.cart_url, content: goToCart,
+    classes: 'w-full' %}"
+  to: "{% render 'armament-button' with url, url: routes.cart_url, content: goToCart,
+    classes: 'w-full' %}"
+  position: 1314..1413
+- from: '{% render ''armament-progress-bar'' with interval: duration, play: "false"
+    %}'
+  to: '{% render ''armament-progress-bar'' with interval, interval: duration, play:
+    "false" %}'
+  position: 1675..1760
+{% endcomment %}

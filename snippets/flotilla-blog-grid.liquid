@@ -34,19 +34,7 @@
       endif
     -%}
     <div loadin-animation-elm loadin-animation-delay class="{% if grid_item_class %}{{ grid_item_class }} {% endif %}">
-      {% render 'ship-image-and-text-card' with
-        image: article.image,
-        image_size: section.settings.image_size,
-        url: article.url,
-        date: article.published_at,
-        show_date: section.settings.show_date,
-        author: article.author,
-        show_author: section.settings.show_author,
-        heading: article.title,
-        text: text,
-        text_alignment: section.settings.text_alignment,
-        read_more: true
-      %}
+      {% render 'ship-image-and-text-card' with image, image: article.image, image_size: section.settings.image_size, url: article.url, date: article.published_at, show_date: section.settings.show_date, author: article.author, show_author: section.settings.show_author, heading: article.title, text: text, text_alignment: section.settings.text_alignment, read_more: true %}
     </div>
   {% endfor %}
 </div>
@@ -59,4 +47,30 @@
 </safe-load-scripts>
 {% endif %}
 
-{% render 'ship-pagination', paginate: paginate %}
+{% render 'ship-pagination', paginate: paginate %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'ship-image-and-text-card' with
+            image: article.image,
+            image_size: section.settings.image_size,
+            url: article.url,
+            date: article.published_at,
+            show_date: section.settings.show_date,
+            author: article.author,
+            show_author: section.settings.show_author,
+            heading: article.title,
+            text: text,
+            text_alignment: section.settings.text_alignment,
+            read_more: true
+          %}
+  to: "{% render 'ship-image-and-text-card' with image, image: article.image, image_size:
+    section.settings.image_size, url: article.url, date: article.published_at, show_date:
+    section.settings.show_date, author: article.author, show_author: section.settings.show_author,
+    heading: article.title, text: text, text_alignment: section.settings.text_alignment,
+    read_more: true %}"
+  position: 1295..1662
+{%- endcomment -%}

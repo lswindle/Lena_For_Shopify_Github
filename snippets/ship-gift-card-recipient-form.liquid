@@ -15,7 +15,7 @@
 >
   <div class="flex flex-row-reverse justify-end items-center py-3 md:py-4" data-checkbox-wrapper>
       {%- assign checkbox_label = 'gift_cards.recipient.checkbox' | t -%}
-      {% render 'armament-input' with type: 'checkbox', id: 'show_gift_card_recipient_checkbox', classes: 'mr-3 appearance-none cursor-pointer active:bg-none checked:bg-none active:text-body checked:text-body checked:bg-current active:bg-body', name: 'properties[__shopify_send_gift_card_to_recipient]', has_label: true, label_text: checkbox_label, label_type_body: true, data_aid: 'show-gift-card-recipient-checkbox', label_attributes: 'data-armada-animation="menu-link"', label_class: 'cursor-pointer leading-none', checked: false %}
+      {% render 'armament-input' with type, type: 'checkbox', id: 'show_gift_card_recipient_checkbox', classes: 'mr-3 appearance-none cursor-pointer active:bg-none checked:bg-none active:text-body checked:text-body checked:bg-current active:bg-body', name: 'properties[__shopify_send_gift_card_to_recipient]', has_label: true, label_text: checkbox_label, label_type_body: true, data_aid: 'show-gift-card-recipient-checkbox', label_attributes: 'data-armada-animation="menu-link"', label_class: 'cursor-pointer leading-none', checked: false %}
   </div>
 
   {% liquid
@@ -35,13 +35,13 @@
           assign formId = 'form_' | append: emailInputPlaceholder | downcase | handleize
           assign input_attr = 'aria-labelledby="' | append: formId | append: '" data-aid="email-input"'
       %}
-      {% render 'armament-input' with type: 'email', has_label: true, animate_label: true, label_text: emailInputString, id: formId, placeholder: emailInputPlaceholder, classes: 'w-full text-body', container_classes: 'w-full', name: emailInputName, required: true, attributes: input_attr, disabled: true %}
+      {% render 'armament-input' with type, type: 'email', has_label: true, animate_label: true, label_text: emailInputString, id: formId, placeholder: emailInputPlaceholder, classes: 'w-full text-body', container_classes: 'w-full', name: emailInputName, required: true, attributes: input_attr, disabled: true %}
 
       {% liquid
           assign formId = 'form_' | append: nameInputPlaceholder | downcase | handleize
           assign input_attr = 'aria-labelledby="' | append: formId | append: '" data-aid="name-input"'
       %}
-      {% render 'armament-input' with type: 'text', has_label: true, animate_label: true, label_text: nameInputString, id: formId, placeholder: nameInputPlaceholder, classes: 'w-full text-body', container_classes: 'w-full', name: nameInputName, required: false, attributes: input_attr, disabled: true %}
+      {% render 'armament-input' with type, type: 'text', has_label: true, animate_label: true, label_text: nameInputString, id: formId, placeholder: nameInputPlaceholder, classes: 'w-full text-body', container_classes: 'w-full', name: nameInputName, required: false, attributes: input_attr, disabled: true %}
 
       {% liquid
           assign formId = 'form_' | append: msgInputPlaceholder | downcase | handleize
@@ -49,12 +49,68 @@
           assign max_characters = 200
           assign max_characters_message = 'gift_cards.recipient.max_characters' | t: max: max_characters
       %}
-      {% render 'armament-textarea' with has_label: true, animate_label: true, label_text: msgInputString, max_characters: max_characters, secondary_label: max_characters_message, id: formId, placeholder: msgInputPlaceholder, classes: 'py-3 w-full text-body', container_classes: 'w-full' name: msgInputName, required: false, attributes: input_attr, disabled: true %}
+      {% render 'armament-textarea' with has_label, has_label: true, animate_label: true, label_text: msgInputString, max_characters: max_characters, secondary_label: max_characters_message, id: formId, placeholder: msgInputPlaceholder, classes: 'py-3 w-full text-body', container_classes: 'w-full', name: msgInputName, required: false, attributes: input_attr, disabled: true %}
 
-      {% render 'armament-input' with type: 'hidden', value: 'if_present', name: 'properties[__shopify_send_gift_card_to_recipient]', disabled: true %}
+      {% render 'armament-input' with type, type: 'hidden', value: 'if_present', name: 'properties[__shopify_send_gift_card_to_recipient]', disabled: true %}
   </div>
 </gift-card-recipient-form>
 
 <safe-load-scripts>
   <script src="{{ 'component-gift-card-recipient-form.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="gift-card-recipient-form"></script>
 </safe-load-scripts>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% render ''armament-input'' with type: ''checkbox'', id: ''show_gift_card_recipient_checkbox'',
+    classes: ''mr-3 appearance-none cursor-pointer active:bg-none checked:bg-none
+    active:text-body checked:text-body checked:bg-current active:bg-body'', name:
+    ''properties[__shopify_send_gift_card_to_recipient]'', has_label: true, label_text:
+    checkbox_label, label_type_body: true, data_aid: ''show-gift-card-recipient-checkbox'',
+    label_attributes: ''data-armada-animation="menu-link"'', label_class: ''cursor-pointer
+    leading-none'', checked: false %}'
+  to: '{% render ''armament-input'' with type, type: ''checkbox'', id: ''show_gift_card_recipient_checkbox'',
+    classes: ''mr-3 appearance-none cursor-pointer active:bg-none checked:bg-none
+    active:text-body checked:text-body checked:bg-current active:bg-body'', name:
+    ''properties[__shopify_send_gift_card_to_recipient]'', has_label: true, label_text:
+    checkbox_label, label_type_body: true, data_aid: ''show-gift-card-recipient-checkbox'',
+    label_attributes: ''data-armada-animation="menu-link"'', label_class: ''cursor-pointer
+    leading-none'', checked: false %}'
+  position: 608..1143
+- from: "{% render 'armament-input' with type: 'email', has_label: true, animate_label:
+    true, label_text: emailInputString, id: formId, placeholder: emailInputPlaceholder,
+    classes: 'w-full text-body', container_classes: 'w-full', name: emailInputName,
+    required: true, attributes: input_attr, disabled: true %}"
+  to: "{% render 'armament-input' with type, type: 'email', has_label: true, animate_label:
+    true, label_text: emailInputString, id: formId, placeholder: emailInputPlaceholder,
+    classes: 'w-full text-body', container_classes: 'w-full', name: emailInputName,
+    required: true, attributes: input_attr, disabled: true %}"
+  position: 2151..2457
+- from: "{% render 'armament-input' with type: 'text', has_label: true, animate_label:
+    true, label_text: nameInputString, id: formId, placeholder: nameInputPlaceholder,
+    classes: 'w-full text-body', container_classes: 'w-full', name: nameInputName,
+    required: false, attributes: input_attr, disabled: true %}"
+  to: "{% render 'armament-input' with type, type: 'text', has_label: true, animate_label:
+    true, label_text: nameInputString, id: formId, placeholder: nameInputPlaceholder,
+    classes: 'w-full text-body', container_classes: 'w-full', name: nameInputName,
+    required: false, attributes: input_attr, disabled: true %}"
+  position: 2681..2984
+- from: "{% render 'armament-textarea' with has_label: true, animate_label: true,
+    label_text: msgInputString, max_characters: max_characters, secondary_label: max_characters_message,
+    id: formId, placeholder: msgInputPlaceholder, classes: 'py-3 w-full text-body',
+    container_classes: 'w-full' name: msgInputName, required: false, attributes: input_attr,
+    disabled: true %}"
+  to: "{% render 'armament-textarea' with has_label, has_label: true, animate_label:
+    true, label_text: msgInputString, max_characters: max_characters, secondary_label:
+    max_characters_message, id: formId, placeholder: msgInputPlaceholder, classes:
+    'py-3 w-full text-body', container_classes: 'w-full', name: msgInputName, required:
+    false, attributes: input_attr, disabled: true %}"
+  position: 3353..3725
+- from: "{% render 'armament-input' with type: 'hidden', value: 'if_present', name:
+    'properties[__shopify_send_gift_card_to_recipient]', disabled: true %}"
+  to: "{% render 'armament-input' with type, type: 'hidden', value: 'if_present',
+    name: 'properties[__shopify_send_gift_card_to_recipient]', disabled: true %}"
+  position: 3733..3884
+{% endcomment %}

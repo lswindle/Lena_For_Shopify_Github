@@ -66,12 +66,12 @@
     data-action="play"
     data-aid="video-play"
   >
-    <div class="z-10 h-full w-full grid place-content-center text-body{% if button_classes %} {{ button_classes }}{% endif %}" style="grid-area: 1 / 1 / 2 / 2">{% render 'armament-icon' with icon: 'play' %}</div>
+    <div class="z-10 h-full w-full grid place-content-center text-body{% if button_classes %} {{ button_classes }}{% endif %}" style="grid-area: 1 / 1 / 2 / 2">{% render 'armament-icon' with icon, icon: 'play' %}</div>
     <div class="z-0 h-full w-full grid place-items-center" style="grid-area: 1 / 1 / 2 / 2">
       {%- if poster == blank %}
-        {% render 'armament-placeholder' with name: 'lifestyle-1', classes: 'h-full object-cover' %}
+        {% render 'armament-placeholder' with name, name: 'lifestyle-1', classes: 'h-full object-cover' %}
       {% else %}
-        {% render 'armament-image' with image: poster, classes: image_classes %}
+        {% render 'armament-image' with image, image: poster, classes: image_classes %}
       {% endif -%}
     </div>
   </button>
@@ -106,3 +106,22 @@
 <safe-load-scripts>
   <script src="{{ 'component-video.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="component-video"></script>
 </safe-load-scripts>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-icon' with icon: 'play' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'play' %}"
+  position: 2519..2571
+- from: "{% render 'armament-placeholder' with name: 'lifestyle-1', classes: 'h-full
+    object-cover' %}"
+  to: "{% render 'armament-placeholder' with name, name: 'lifestyle-1', classes: 'h-full
+    object-cover' %}"
+  position: 2711..2809
+- from: "{% render 'armament-image' with image: poster, classes: image_classes %}"
+  to: "{% render 'armament-image' with image, image: poster, classes: image_classes
+    %}"
+  position: 2835..2914
+{% endcomment %}

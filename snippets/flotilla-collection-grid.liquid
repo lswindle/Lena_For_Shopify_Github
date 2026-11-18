@@ -97,37 +97,24 @@
           -%}
           <div class="max-w-full block w-full">
             <div loadin-animation-elm loadin-animation-delay data-loadin-animation-index="{{ forloop.index0 }}">
-              {% render 'ship-product-card' with
-              card_product: product,
-              block_order: block_order,
-              gallery: settings.collection_hover_effect,
-              gallery_mode: gallery_mode,
-              align: settings.product_info_position,
-              aspect_ratio: settings.product_cards_aspect_ratio,
-              quick_view_button_only: true,
-              block_attr_image: img_block_attr,
-              block_attr_title: title_block_attr,
-              block_attr_price: price_block_attr,
-              block_attr_swatch: swatch_block_attr,
-              block_attr_quick_add: quick_add_block_attr,
-              classes: 'w-full' %}
+              {% render 'ship-product-card' with card_product, card_product: product, block_order: block_order, gallery: settings.collection_hover_effect, gallery_mode: gallery_mode, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio, quick_view_button_only: true, block_attr_image: img_block_attr, block_attr_title: title_block_attr, block_attr_price: price_block_attr, block_attr_swatch: swatch_block_attr, block_attr_quick_add: quick_add_block_attr, classes: 'w-full' %}
             </div>
-            {% render 'ship-quick-view' with quick_view_product: product, modal_only: true %}
+            {% render 'ship-quick-view' with quick_view_product, quick_view_product: product, modal_only: true %}
           </div>
           {% endfor %}
         </div>
 
         {% if show_view_all == true %}
           <div class="w-full flex items-center justify-center pt-5">
-            {% render 'armament-button' with url: collection.url, content: view_all_btn, attributes: view_all_aria, classes: 'max-w-200' %}
+            {% render 'armament-button' with url, url: collection.url, content: view_all_btn, attributes: view_all_aria, classes: 'max-w-200' %}
           </div>
         {% endif %}
 
         {% if has_pagination and paginate.pages > 1 %}
           {% if pagination_type and pagination_type == 'paged' %}
-            {% render 'ship-pagination' with paginate: paginate %}
+            {% render 'ship-pagination' with paginate, paginate: paginate %}
           {% else %}
-            {% render 'ship-pagination-load-more' with paginate: paginate, product_count: products_per_page %}
+            {% render 'ship-pagination-load-more' with paginate, paginate: paginate, product_count: products_per_page %}
           {% endif %}
         {% endif %}
       {% endpaginate %}
@@ -143,24 +130,16 @@
         -%}
         <div class="max-w-full block w-full">
           <div loadin-animation-elm loadin-animation-delay class="max-w-full block w-full">
-            {% render 'ship-product-card' with
-            card_product: product,
-            block_order: block_order,
-            gallery: settings.collection_hover_effect,
-            gallery_mode: gallery_mode,
-            align: settings.product_info_position,
-            aspect_ratio: settings.product_cards_aspect_ratio,
-            quick_view_button_only: true,
-            classes: 'w-full' %}
+            {% render 'ship-product-card' with card_product, card_product: product, block_order: block_order, gallery: settings.collection_hover_effect, gallery_mode: gallery_mode, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio, quick_view_button_only: true, classes: 'w-full' %}
           </div>
-          {% render 'ship-quick-view' with quick_view_product: product, modal_only: true %}
+          {% render 'ship-quick-view' with quick_view_product, quick_view_product: product, modal_only: true %}
         </div>
         {% endfor %}
       </div>
 
       {% if show_view_all == true %}
         <div class="w-full flex items-center justify-center pt-5">
-          {% render 'armament-button' with url: collection.url, content: view_all_btn, attributes: view_all_aria, classes: 'max-w-200', data_aid: 'collection-view-all-button' %}
+          {% render 'armament-button' with url, url: collection.url, content: view_all_btn, attributes: view_all_aria, classes: 'max-w-200', data_aid: 'collection-view-all-button' %}
         </div>
       {% endif %}
     {% endif %}
@@ -173,3 +152,77 @@
     </safe-load-scripts>
   {% endif %}
 </collection-grid>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'ship-product-card' with
+                  card_product: product,
+                  block_order: block_order,
+                  gallery: settings.collection_hover_effect,
+                  gallery_mode: gallery_mode,
+                  align: settings.product_info_position,
+                  aspect_ratio: settings.product_cards_aspect_ratio,
+                  quick_view_button_only: true,
+                  block_attr_image: img_block_attr,
+                  block_attr_title: title_block_attr,
+                  block_attr_price: price_block_attr,
+                  block_attr_swatch: swatch_block_attr,
+                  block_attr_quick_add: quick_add_block_attr,
+                  classes: 'w-full' %}
+  to: "{% render 'ship-product-card' with card_product, card_product: product, block_order:
+    block_order, gallery: settings.collection_hover_effect, gallery_mode: gallery_mode,
+    align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio,
+    quick_view_button_only: true, block_attr_image: img_block_attr, block_attr_title:
+    title_block_attr, block_attr_price: price_block_attr, block_attr_swatch: swatch_block_attr,
+    block_attr_quick_add: quick_add_block_attr, classes: 'w-full' %}"
+  position: 3893..4390
+- from: "{% render 'ship-quick-view' with quick_view_product: product, modal_only:
+    true %}"
+  to: "{% render 'ship-quick-view' with quick_view_product, quick_view_product: product,
+    modal_only: true %}"
+  position: 4422..4523
+- from: "{% render 'armament-button' with url: collection.url, content: view_all_btn,
+    attributes: view_all_aria, classes: 'max-w-200' %}"
+  to: "{% render 'armament-button' with url, url: collection.url, content: view_all_btn,
+    attributes: view_all_aria, classes: 'max-w-200' %}"
+  position: 4700..4832
+- from: "{% render 'ship-pagination' with paginate: paginate %}"
+  to: "{% render 'ship-pagination' with paginate, paginate: paginate %}"
+  position: 5004..5068
+- from: "{% render 'ship-pagination-load-more' with paginate: paginate, product_count:
+    products_per_page %}"
+  to: "{% render 'ship-pagination-load-more' with paginate, paginate: paginate, product_count:
+    products_per_page %}"
+  position: 5102..5210
+- from: |-
+    {% render 'ship-product-card' with
+                card_product: product,
+                block_order: block_order,
+                gallery: settings.collection_hover_effect,
+                gallery_mode: gallery_mode,
+                align: settings.product_info_position,
+                aspect_ratio: settings.product_cards_aspect_ratio,
+                quick_view_button_only: true,
+                classes: 'w-full' %}
+  to: "{% render 'ship-product-card' with card_product, card_product: product, block_order:
+    block_order, gallery: settings.collection_hover_effect, gallery_mode: gallery_mode,
+    align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio,
+    quick_view_button_only: true, classes: 'w-full' %}"
+  position: 5767..6076
+- from: "{% render 'ship-quick-view' with quick_view_product: product, modal_only:
+    true %}"
+  to: "{% render 'ship-quick-view' with quick_view_product, quick_view_product: product,
+    modal_only: true %}"
+  position: 6104..6205
+- from: "{% render 'armament-button' with url: collection.url, content: view_all_btn,
+    attributes: view_all_aria, classes: 'max-w-200', data_aid: 'collection-view-all-button'
+    %}"
+  to: "{% render 'armament-button' with url, url: collection.url, content: view_all_btn,
+    attributes: view_all_aria, classes: 'max-w-200', data_aid: 'collection-view-all-button'
+    %}"
+  position: 6370..6542
+{% endcomment %}

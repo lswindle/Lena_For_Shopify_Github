@@ -74,7 +74,7 @@
         {% for slider_product in slider_collection.products limit: product_limit %}
           <li data-name="slide" class="relative flex place-content-center {{ slide_class }}">
             <div class="w-full mr-1">
-              {% render 'ship-product-card' with card_product: slider_product, quick_view_button_only: true, gallery: gallery_type, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio %}
+              {% render 'ship-product-card' with card_product, card_product: slider_product, quick_view_button_only: true, gallery: gallery_type, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio %}
             </div>
           </li>
         {% endfor %}
@@ -85,9 +85,9 @@
           <li data-name="slide" class="relative flex place-content-center {{ slide_class }}" style="min-width: {{ init_slide_width }}">
             <div class="w-full mr-1 flex flex-col">
               {% assign placeholder_name = 'product-' | append: block_index %}
-              {% render 'armament-placeholder' with name: placeholder_name %}
+              {% render 'armament-placeholder' with name, name: placeholder_name %}
               <div class="text-{{ settings.product_info_position }} px-3 pt-2">
-                {% render 'armament-heading' with tag: 'h5', heading_content: 'Example product title' %}
+                {% render 'armament-heading' with tag, tag: 'h5', heading_content: 'Example product title' %}
                 <span>{{ 1999 | money }}</span>
               </div>
             </div>
@@ -107,7 +107,7 @@
         -%}
         <li data-name="slide" class="relative flex place-content-center {{ slide_class }}" style="min-width: {{ init_slide_width }}">
           <div class="w-full flex items-center justify-center text-center">
-            {% render 'ship-text-card' with heading: heading, button_label: view_all_string, button_link: card_button_link, button_style: button_style %}
+            {% render 'ship-text-card' with heading, heading: heading, button_label: view_all_string, button_link: card_button_link, button_style: button_style %}
           </div>
         </li>
       {% endif %}
@@ -116,7 +116,7 @@
     {% comment %} Render modal outside of transform element (slider) for absolute positioning purposes {% endcomment %}
     {% if slider_collection != blank %}
       {% for slider_product in slider_collection.products limit: product_limit %}
-        {% render 'ship-quick-view' with quick_view_product: slider_product, modal_only: true %}
+        {% render 'ship-quick-view' with quick_view_product, quick_view_product: slider_product, modal_only: true %}
       {% endfor %}
     {% endif %}
   </div>
@@ -125,12 +125,55 @@
     {% if show_arrows == false %}
       {% assign arrow_classes = 'md:hidden' %}
     {% endif %}
-    {% render 'armament-slider-arrows' with hide_on_mobile: true, vertical_position_classes: 'top-[calc(50%-50px)]', classes: arrow_classes %}
+    {% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true, vertical_position_classes: 'top-[calc(50%-50px)]', classes: arrow_classes %}
     <div data-name="mobile-indicator" class="block md:hidden px-4">
-      {% render 'armament-scroll-bar' with classes: 'pb-4', item_count: number_of_slides, parent: 'slider-engine', target: 'slider', indicator: 'progress' %}
+      {% render 'armament-scroll-bar' with classes, classes: 'pb-4', item_count: number_of_slides, parent: 'slider-engine', target: 'slider', indicator: 'progress' %}
     </div>
   </template>
 </slider-engine>
 <safe-load-scripts>
   <script src="{{ 'engine-slider.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="slider-engine"></script>
 </safe-load-scripts>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'ship-product-card' with card_product: slider_product, quick_view_button_only:
+    true, gallery: gallery_type, align: settings.product_info_position, aspect_ratio:
+    settings.product_cards_aspect_ratio %}"
+  to: "{% render 'ship-product-card' with card_product, card_product: slider_product,
+    quick_view_button_only: true, gallery: gallery_type, align: settings.product_info_position,
+    aspect_ratio: settings.product_cards_aspect_ratio %}"
+  position: 2501..2724
+- from: "{% render 'armament-placeholder' with name: placeholder_name %}"
+  to: "{% render 'armament-placeholder' with name, name: placeholder_name %}"
+  position: 3123..3192
+- from: "{% render 'armament-heading' with tag: 'h5', heading_content: 'Example product
+    title' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h5', heading_content: 'Example
+    product title' %}"
+  position: 3289..3382
+- from: "{% render 'ship-text-card' with heading: heading, button_label: view_all_string,
+    button_link: card_button_link, button_style: button_style %}"
+  to: "{% render 'ship-text-card' with heading, heading: heading, button_label: view_all_string,
+    button_link: card_button_link, button_style: button_style %}"
+  position: 4086..4236
+- from: "{% render 'ship-quick-view' with quick_view_product: slider_product, modal_only:
+    true %}"
+  to: "{% render 'ship-quick-view' with quick_view_product, quick_view_product: slider_product,
+    modal_only: true %}"
+  position: 4547..4655
+- from: "{% render 'armament-slider-arrows' with hide_on_mobile: true, vertical_position_classes:
+    'top-[calc(50%-50px)]', classes: arrow_classes %}"
+  to: "{% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true,
+    vertical_position_classes: 'top-[calc(50%-50px)]', classes: arrow_classes %}"
+  position: 4815..4969
+- from: "{% render 'armament-scroll-bar' with classes: 'pb-4', item_count: number_of_slides,
+    parent: 'slider-engine', target: 'slider', indicator: 'progress' %}"
+  to: "{% render 'armament-scroll-bar' with classes, classes: 'pb-4', item_count:
+    number_of_slides, parent: 'slider-engine', target: 'slider', indicator: 'progress'
+    %}"
+  position: 5044..5204
+{% endcomment %}

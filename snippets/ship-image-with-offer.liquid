@@ -18,9 +18,9 @@
     {% endif %}
 
         {% if image_offer != blank %}
-            {% render 'armament-image' with image: image_offer %}
+            {% render 'armament-image' with image, image: image_offer %}
         {% else %}
-            {% render 'armament-placeholder' with name: 'lifestyle-2' %}
+            {% render 'armament-placeholder' with name, name: 'lifestyle-2' %}
         {% endif %}
         
     {% if link != blank %}
@@ -28,3 +28,16 @@
     {% endif %}
 </div>
 
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-image' with image: image_offer %}"
+  to: "{% render 'armament-image' with image, image: image_offer %}"
+  position: 452..512
+- from: "{% render 'armament-placeholder' with name: 'lifestyle-2' %}"
+  to: "{% render 'armament-placeholder' with name, name: 'lifestyle-2' %}"
+  position: 544..610
+{% endcomment %}

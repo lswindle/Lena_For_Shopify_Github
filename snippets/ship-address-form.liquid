@@ -51,81 +51,21 @@
 
   <div class="{{ inputClasses }}">
     {% assign firstNameString = 'customer.addresses.first_name' | t %}
-    {% render 'armament-input' with 
-    type: inputType,
-    has_label: true, 
-    label_class: labelClass,
-    animate_label: true, 
-    container_classes: "mb-3 md:mb-0 md:w-1/2 text-body",
-    classes: "w-full"
-    label_text: firstNameString, 
-    id: "address--first-name", 
-    placeholder: "first name", 
-    value: form.first_name, 
-    name: "address[first_name]", 
-    required: inputRequired %}
+    {% render 'armament-input' with type, type: inputType, has_label: true, label_class: labelClass, animate_label: true, container_classes: "mb-3 md:mb-0 md:w-1/2 text-body", classes: "w-full", label_text: firstNameString, id: "address--first-name", placeholder: "first name", value: form.first_name, name: "address[first_name]", required: inputRequired %}
 
     {% assign lastNameString = 'customer.addresses.last_name' | t %}
-    {% render 'armament-input' with 
-    type: inputType,
-    has_label: true, 
-    label_class: labelClass,
-    animate_label: true,
-    container_classes: "md:w-1/2 text-body",
-    classes: "w-full"
-    label_text: lastNameString, 
-    id: "address--last-name", 
-    placeholder: "last name", 
-    value: form.last_name, 
-    name: "address[last_name]", 
-    required: inputRequired %}
+    {% render 'armament-input' with type, type: inputType, has_label: true, label_class: labelClass, animate_label: true, container_classes: "md:w-1/2 text-body", classes: "w-full", label_text: lastNameString, id: "address--last-name", placeholder: "last name", value: form.last_name, name: "address[last_name]", required: inputRequired %}
   </div>
 
   {% assign addressOneString = 'customer.addresses.address1' | t %}
-  {% render 'armament-input' with 
-  type: inputType,
-  has_label: true, 
-  label_class: labelClass,
-  animate_label: true, 
-  container_classes: armamentClasses,
-  classes: "w-full"
-  label_text: addressOneString, 
-  id: "address--address1", 
-  placeholder: "address line 1", 
-  value: form.address1, 
-  name: "address[address1]", 
-  required: inputRequired %}
+  {% render 'armament-input' with type, type: inputType, has_label: true, label_class: labelClass, animate_label: true, container_classes: armamentClasses, classes: "w-full", label_text: addressOneString, id: "address--address1", placeholder: "address line 1", value: form.address1, name: "address[address1]", required: inputRequired %}
 
   {% assign addresstwoString = 'customer.addresses.address2' | t %}
-  {% render 'armament-input' with 
-  type: inputType,
-  has_label: true, 
-  label_class: labelClass,
-  animate_label: true, 
-  container_classes: armamentClasses,
-  classes: "w-full"
-  label_text: addresstwoString, 
-  id: "address--address2", 
-  placeholder: "address line 2", 
-  value: form.address2, 
-  name: "address[address2]", 
-  required: inputRequired %}
+  {% render 'armament-input' with type, type: inputType, has_label: true, label_class: labelClass, animate_label: true, container_classes: armamentClasses, classes: "w-full", label_text: addresstwoString, id: "address--address2", placeholder: "address line 2", value: form.address2, name: "address[address2]", required: inputRequired %}
 
   <div class="{{ inputClasses }}">
     {% assign addressCityString = 'customer.addresses.city' | t %}
-    {% render 'armament-input' with 
-    type: inputType,
-    has_label: true, 
-    label_class: labelClass,
-    animate_label: true,
-    container_classes: "mb-3 md:mb-0 md:w-1/2 text-body"
-    classes: "w-full"
-    label_text: addressCityString, 
-    id: "address--city", 
-    placeholder: "city", 
-    value: form.city, 
-    name: "address[city]", 
-    required: inputRequired %}
+    {% render 'armament-input' with type, type: inputType, has_label: true, label_class: labelClass, animate_label: true, container_classes: "mb-3 md:mb-0 md:w-1/2 text-body", classes: "w-full", label_text: addressCityString, id: "address--city", placeholder: "city", value: form.city, name: "address[city]", required: inputRequired %}
 
     <div class="relative flex md:w-1/2 text-body{% if changes_default_only %} hidden{% endif %}">
       <select
@@ -149,34 +89,10 @@
 
   <div class="{{ inputClasses }}">
     {% assign addressZipString = 'customer.addresses.zip' | t %}
-    {% render 'armament-input' with 
-    type: inputType,
-    has_label: true, 
-    label_class: labelClass,
-    animate_label: true, 
-    container_classes: "mb-3 md:mb-0 md:w-1/2 text-body",
-    classes: "w-full",
-    label_text: addressZipString, 
-    id: "address--zip", 
-    placeholder: "address postal / zip code", 
-    value: form.zip, 
-    name: "address[zip]", 
-    required: inputRequired %}
+    {% render 'armament-input' with type, type: inputType, has_label: true, label_class: labelClass, animate_label: true, container_classes: "mb-3 md:mb-0 md:w-1/2 text-body", classes: "w-full", label_text: addressZipString, id: "address--zip", placeholder: "address postal / zip code", value: form.zip, name: "address[zip]", required: inputRequired %}
 
     {% assign addressPhoneString = 'customer.addresses.phone' | t %}
-    {% render 'armament-input' with 
-    has_label: true, 
-    label_class: labelClass,
-    animate_label: true,
-    type: "tel", 
-    container_classes: "md:w-1/2 text-body",
-    classes: telClasses,
-    label_text: addressPhoneString, 
-    id: "address--phone", 
-    placeholder: "phone", 
-    value: form.phone, 
-    name: "address[phone]", 
-    required: inputRequired %}
+    {% render 'armament-input' with has_label, has_label: true, label_class: labelClass, animate_label: true, type: "tel", container_classes: "md:w-1/2 text-body", classes: telClasses, label_text: addressPhoneString, id: "address--phone", placeholder: "phone", value: form.phone, name: "address[phone]", required: inputRequired %}
   </div>
 
 <div class="flex {% unless changes_default_only == true %}mb-3 md:mb-4 justify-end{% else %}m-0 justify-start{% endunless %} ">
@@ -187,17 +103,121 @@
     endif
   -%}
   
-  {% render 'armament-checkbox' with id: address_id, name: 'address[default]', label_text: defaultString, data_aid: 'default-address-checkbox', attributes: checkbox_attr %}
+  {% render 'armament-checkbox' with id, id: address_id, name: 'address[default]', label_text: defaultString, data_aid: 'default-address-checkbox', attributes: checkbox_attr %}
 </div>
 
 {% unless changes_default_only == true %}
 <div class="flex justify-end">
   {% assign addressCancelString = 'customer.addresses.cancel' | t %}
-  {% render 'armament-button' with type: 'reset', content: addressCancelString, style: 'outline', classes: 'w-full md:w-auto mr-3 md:mr-4', attributes: 'data-armada-modal-close' %}
+  {% render 'armament-button' with type, type: 'reset', content: addressCancelString, style: 'outline', classes: 'w-full md:w-auto mr-3 md:mr-4', attributes: 'data-armada-modal-close' %}
 
   {% assign addressSaveString = 'customer.addresses.save' | t %}
-  {% render 'armament-button' with content: addressSaveString, style: 'filled', classes: 'w-full md:w-auto' %}
+  {% render 'armament-button' with content, content: addressSaveString, style: 'filled', classes: 'w-full md:w-auto' %}
 </div>
 {% endunless %}
 
-{%- endform -%}
+{%- endform -%}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-input' with \n    type: inputType,\n    has_label: true,
+    \n    label_class: labelClass,\n    animate_label: true, \n    container_classes:
+    \"mb-3 md:mb-0 md:w-1/2 text-body\",\n    classes: \"w-full\"\n    label_text:
+    firstNameString, \n    id: \"address--first-name\", \n    placeholder: \"first
+    name\", \n    value: form.first_name, \n    name: \"address[first_name]\", \n
+    \   required: inputRequired %}"
+  to: '{% render ''armament-input'' with type, type: inputType, has_label: true, label_class:
+    labelClass, animate_label: true, container_classes: "mb-3 md:mb-0 md:w-1/2 text-body",
+    classes: "w-full", label_text: firstNameString, id: "address--first-name", placeholder:
+    "first name", value: form.first_name, name: "address[first_name]", required: inputRequired
+    %}'
+  position: 1612..1965
+- from: "{% render 'armament-input' with \n    type: inputType,\n    has_label: true,
+    \n    label_class: labelClass,\n    animate_label: true,\n    container_classes:
+    \"md:w-1/2 text-body\",\n    classes: \"w-full\"\n    label_text: lastNameString,
+    \n    id: \"address--last-name\", \n    placeholder: \"last name\", \n    value:
+    form.last_name, \n    name: \"address[last_name]\", \n    required: inputRequired
+    %}"
+  to: '{% render ''armament-input'' with type, type: inputType, has_label: true, label_class:
+    labelClass, animate_label: true, container_classes: "md:w-1/2 text-body", classes:
+    "w-full", label_text: lastNameString, id: "address--last-name", placeholder: "last
+    name", value: form.last_name, name: "address[last_name]", required: inputRequired
+    %}'
+  position: 2040..2375
+- from: "{% render 'armament-input' with \n  type: inputType,\n  has_label: true,
+    \n  label_class: labelClass,\n  animate_label: true, \n  container_classes: armamentClasses,\n
+    \ classes: \"w-full\"\n  label_text: addressOneString, \n  id: \"address--address1\",
+    \n  placeholder: \"address line 1\", \n  value: form.address1, \n  name: \"address[address1]\",
+    \n  required: inputRequired %}"
+  to: '{% render ''armament-input'' with type, type: inputType, has_label: true, label_class:
+    labelClass, animate_label: true, container_classes: armamentClasses, classes:
+    "w-full", label_text: addressOneString, id: "address--address1", placeholder:
+    "address line 1", value: form.address1, name: "address[address1]", required: inputRequired
+    %}'
+  position: 2456..2790
+- from: "{% render 'armament-input' with \n  type: inputType,\n  has_label: true,
+    \n  label_class: labelClass,\n  animate_label: true, \n  container_classes: armamentClasses,\n
+    \ classes: \"w-full\"\n  label_text: addresstwoString, \n  id: \"address--address2\",
+    \n  placeholder: \"address line 2\", \n  value: form.address2, \n  name: \"address[address2]\",
+    \n  required: inputRequired %}"
+  to: '{% render ''armament-input'' with type, type: inputType, has_label: true, label_class:
+    labelClass, animate_label: true, container_classes: armamentClasses, classes:
+    "w-full", label_text: addresstwoString, id: "address--address2", placeholder:
+    "address line 2", value: form.address2, name: "address[address2]", required: inputRequired
+    %}'
+  position: 2862..3196
+- from: "{% render 'armament-input' with \n    type: inputType,\n    has_label: true,
+    \n    label_class: labelClass,\n    animate_label: true,\n    container_classes:
+    \"mb-3 md:mb-0 md:w-1/2 text-body\"\n    classes: \"w-full\"\n    label_text:
+    addressCityString, \n    id: \"address--city\", \n    placeholder: \"city\", \n
+    \   value: form.city, \n    name: \"address[city]\", \n    required: inputRequired
+    %}"
+  to: '{% render ''armament-input'' with type, type: inputType, has_label: true, label_class:
+    labelClass, animate_label: true, container_classes: "mb-3 md:mb-0 md:w-1/2 text-body",
+    classes: "w-full", label_text: addressCityString, id: "address--city", placeholder:
+    "city", value: form.city, name: "address[city]", required: inputRequired %}'
+  position: 3304..3635
+- from: "{% render 'armament-input' with \n    type: inputType,\n    has_label: true,
+    \n    label_class: labelClass,\n    animate_label: true, \n    container_classes:
+    \"mb-3 md:mb-0 md:w-1/2 text-body\",\n    classes: \"w-full\",\n    label_text:
+    addressZipString, \n    id: \"address--zip\", \n    placeholder: \"address postal
+    / zip code\", \n    value: form.zip, \n    name: \"address[zip]\", \n    required:
+    inputRequired %}"
+  to: '{% render ''armament-input'' with type, type: inputType, has_label: true, label_class:
+    labelClass, animate_label: true, container_classes: "mb-3 md:mb-0 md:w-1/2 text-body",
+    classes: "w-full", label_text: addressZipString, id: "address--zip", placeholder:
+    "address postal / zip code", value: form.zip, name: "address[zip]", required:
+    inputRequired %}'
+  position: 4459..4807
+- from: "{% render 'armament-input' with \n    has_label: true, \n    label_class:
+    labelClass,\n    animate_label: true,\n    type: \"tel\", \n    container_classes:
+    \"md:w-1/2 text-body\",\n    classes: telClasses,\n    label_text: addressPhoneString,
+    \n    id: \"address--phone\", \n    placeholder: \"phone\", \n    value: form.phone,
+    \n    name: \"address[phone]\", \n    required: inputRequired %}"
+  to: '{% render ''armament-input'' with has_label, has_label: true, label_class:
+    labelClass, animate_label: true, type: "tel", container_classes: "md:w-1/2 text-body",
+    classes: telClasses, label_text: addressPhoneString, id: "address--phone", placeholder:
+    "phone", value: form.phone, name: "address[phone]", required: inputRequired %}'
+  position: 4882..5208
+- from: "{% render 'armament-checkbox' with id: address_id, name: 'address[default]',
+    label_text: defaultString, data_aid: 'default-address-checkbox', attributes: checkbox_attr
+    %}"
+  to: "{% render 'armament-checkbox' with id, id: address_id, name: 'address[default]',
+    label_text: defaultString, data_aid: 'default-address-checkbox', attributes: checkbox_attr
+    %}"
+  position: 5527..5701
+- from: "{% render 'armament-button' with type: 'reset', content: addressCancelString,
+    style: 'outline', classes: 'w-full md:w-auto mr-3 md:mr-4', attributes: 'data-armada-modal-close'
+    %}"
+  to: "{% render 'armament-button' with type, type: 'reset', content: addressCancelString,
+    style: 'outline', classes: 'w-full md:w-auto mr-3 md:mr-4', attributes: 'data-armada-modal-close'
+    %}"
+  position: 5854..6038
+- from: "{% render 'armament-button' with content: addressSaveString, style: 'filled',
+    classes: 'w-full md:w-auto' %}"
+  to: "{% render 'armament-button' with content, content: addressSaveString, style:
+    'filled', classes: 'w-full md:w-auto' %}"
+  position: 6107..6224
+{%- endcomment -%}

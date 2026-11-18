@@ -60,23 +60,23 @@
             class="relative min-w-full flex items-baseline content-start place-content-center lg:mb-1 lg:last:mb-0 h-auto {% if forloop.first %} lg:after:absolute lg:after:h-2 lg:after:left-0 lg:after:right-0 lg:after:bottom-0 lg:after:bg-body{% endif %}"
           >
             <div class="w-full grid lg:hidden">
-              {% render 'armament-product-media' with media: media, enable_loop: loop_enabled, title: gallery_product.title, product_id: gallery_product.id %}
+              {% render 'armament-product-media' with media, media: media, enable_loop: loop_enabled, title: gallery_product.title, product_id: gallery_product.id %}
             </div>
             <div class="hidden lg:block pointer-events-none" tabindex="0">
-              {% render 'armament-image' with image: media, classes: 'h-full object-cover' %}
+              {% render 'armament-image' with image, image: media, classes: 'h-full object-cover' %}
             </div>
           </li>
         {% endfor %}
       </ul>
       {% if settings.custom_badges %}
         <div class="absolute top-0 left-0 z-50 pointer-events-none lg:hidden">
-          {% render 'engine-badges' with badges_product: gallery_product %}
+          {% render 'engine-badges' with badges_product, badges_product: gallery_product %}
         </div>
       {% endif %}
     </div>
     <template>
       <div data-name="mobile-indicator" class="block lg:hidden pt-3 bg-page">
-        {% render 'armament-scroll-bar' with item_count: gallery_product.media.size, parent: 'slider-engine', target: 'slider', indicator: 'progress' %}
+        {% render 'armament-scroll-bar' with item_count, item_count: gallery_product.media.size, parent: 'slider-engine', target: 'slider', indicator: 'progress' %}
       </div>
     </template>
   </slider-engine>
@@ -85,12 +85,12 @@
       <div data-armada-selector="product-media-container" class="relative">
         {% if settings.custom_badges %}
           <div class="absolute top-0 left-0 z-50 pointer-events-none">
-            {% render 'engine-badges' with badges_product: gallery_product %}
+            {% render 'engine-badges' with badges_product, badges_product: gallery_product %}
           </div>
         {% endif %}
         {% for media in gallery_product.media %}
           <div{% unless forloop.first %} class="hidden"{% endunless %} data-armada-selector="product-media" data-media-id={{ media.id }}{% if forloop.first %} data-media-selected="true"{% else %} data-media-selected="false"{% endif %}>
-            {% render 'armament-product-media' with media: media, enable_zoom: zoom_enabled, enable_loop: loop_enabled, title: gallery_product.title, product_id: gallery_product.id %}
+            {% render 'armament-product-media' with media, media: media, enable_zoom: zoom_enabled, enable_loop: loop_enabled, title: gallery_product.title, product_id: gallery_product.id %}
           </div>
         {% endfor %}
       </div>
@@ -101,3 +101,40 @@
   <script src="{{ 'component-product-thumbnail-gallery.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="product-thumbnail-gallery"></script>
   <script src="{{ 'engine-slider.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="slider-engine"></script>
 </safe-load-scripts>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-product-media' with media: media, enable_loop: loop_enabled,
+    title: gallery_product.title, product_id: gallery_product.id %}"
+  to: "{% render 'armament-product-media' with media, media: media, enable_loop: loop_enabled,
+    title: gallery_product.title, product_id: gallery_product.id %}"
+  position: 2828..2979
+- from: "{% render 'armament-image' with image: media, classes: 'h-full object-cover'
+    %}"
+  to: "{% render 'armament-image' with image, image: media, classes: 'h-full object-cover'
+    %}"
+  position: 3088..3174
+- from: "{% render 'engine-badges' with badges_product: gallery_product %}"
+  to: "{% render 'engine-badges' with badges_product, badges_product: gallery_product
+    %}"
+  position: 3370..3451
+- from: "{% render 'armament-scroll-bar' with item_count: gallery_product.media.size,
+    parent: 'slider-engine', target: 'slider', indicator: 'progress' %}"
+  to: "{% render 'armament-scroll-bar' with item_count, item_count: gallery_product.media.size,
+    parent: 'slider-engine', target: 'slider', indicator: 'progress' %}"
+  position: 3597..3753
+- from: "{% render 'engine-badges' with badges_product: gallery_product %}"
+  to: "{% render 'engine-badges' with badges_product, badges_product: gallery_product
+    %}"
+  position: 4050..4131
+- from: "{% render 'armament-product-media' with media: media, enable_zoom: zoom_enabled,
+    enable_loop: loop_enabled, title: gallery_product.title, product_id: gallery_product.id
+    %}"
+  to: "{% render 'armament-product-media' with media, media: media, enable_zoom: zoom_enabled,
+    enable_loop: loop_enabled, title: gallery_product.title, product_id: gallery_product.id
+    %}"
+  position: 4466..4644
+{% endcomment %}

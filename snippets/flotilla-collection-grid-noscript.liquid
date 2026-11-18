@@ -65,36 +65,77 @@
       {% paginate collection.products by products_per_page %}
         <div class="{{ grid_class }}">
           {% for product in collection.products %}
-            {% render 'ship-product-card-noscript' with card_section: grid_section, card_product: product, gallery: settings.collection_hover_effect, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio %}
+            {% render 'ship-product-card-noscript' with card_section, card_section: grid_section, card_product: product, gallery: settings.collection_hover_effect, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio %}
           {% endfor %}
         </div>
 
         {% if show_view_all == true %}
           <div class="w-full flex items-center justify-center pt-5">
-            {% render 'armament-button' with url: collection.url, content: view_all_btn, attributes: view_all_aria, classes: 'max-w-200' %}
+            {% render 'armament-button' with url, url: collection.url, content: view_all_btn, attributes: view_all_aria, classes: 'max-w-200' %}
           </div>
         {% endif %}
 
         {% if has_pagination and paginate.pages > 1 %}
           {% if pagination_type and pagination_type == 'paged' %}
-            {% render 'ship-pagination' with paginate: paginate %}
+            {% render 'ship-pagination' with paginate, paginate: paginate %}
           {% else %}
-            {% render 'ship-pagination-load-more' with paginate: paginate, product_count: products_per_page %}
+            {% render 'ship-pagination-load-more' with paginate, paginate: paginate, product_count: products_per_page %}
           {% endif %}
         {% endif %}
       {% endpaginate %}
     {% else %}
       <div class="{{ grid_class }}">
         {% for product in collection.products limit: products_per_page %}
-          {% render 'ship-product-card-noscript' with card_section: grid_section, card_product: product, gallery: settings.collection_hover_effect, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio %}
+          {% render 'ship-product-card-noscript' with card_section, card_section: grid_section, card_product: product, gallery: settings.collection_hover_effect, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio %}
         {% endfor %}
       </div>
 
       {% if show_view_all == true %}
         <div class="w-full flex items-center justify-center pt-5">
-          {% render 'armament-button' with url: collection.url, content: view_all_btn, attributes: view_all_aria, classes: 'max-w-200', data_aid: 'collection-view-all-button' %}
+          {% render 'armament-button' with url, url: collection.url, content: view_all_btn, attributes: view_all_aria, classes: 'max-w-200', data_aid: 'collection-view-all-button' %}
         </div>
       {% endif %}
     {% endif %}
   {% endif %}
 </div>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'ship-product-card-noscript' with card_section: grid_section, card_product:
+    product, gallery: settings.collection_hover_effect, align: settings.product_info_position,
+    aspect_ratio: settings.product_cards_aspect_ratio %}"
+  to: "{% render 'ship-product-card-noscript' with card_section, card_section: grid_section,
+    card_product: product, gallery: settings.collection_hover_effect, align: settings.product_info_position,
+    aspect_ratio: settings.product_cards_aspect_ratio %}"
+  position: 2632..2875
+- from: "{% render 'armament-button' with url: collection.url, content: view_all_btn,
+    attributes: view_all_aria, classes: 'max-w-200' %}"
+  to: "{% render 'armament-button' with url, url: collection.url, content: view_all_btn,
+    attributes: view_all_aria, classes: 'max-w-200' %}"
+  position: 3035..3167
+- from: "{% render 'ship-pagination' with paginate: paginate %}"
+  to: "{% render 'ship-pagination' with paginate, paginate: paginate %}"
+  position: 3339..3403
+- from: "{% render 'ship-pagination-load-more' with paginate: paginate, product_count:
+    products_per_page %}"
+  to: "{% render 'ship-pagination-load-more' with paginate, paginate: paginate, product_count:
+    products_per_page %}"
+  position: 3437..3545
+- from: "{% render 'ship-product-card-noscript' with card_section: grid_section, card_product:
+    product, gallery: settings.collection_hover_effect, align: settings.product_info_position,
+    aspect_ratio: settings.product_cards_aspect_ratio %}"
+  to: "{% render 'ship-product-card-noscript' with card_section, card_section: grid_section,
+    card_product: product, gallery: settings.collection_hover_effect, align: settings.product_info_position,
+    aspect_ratio: settings.product_cards_aspect_ratio %}"
+  position: 3748..3991
+- from: "{% render 'armament-button' with url: collection.url, content: view_all_btn,
+    attributes: view_all_aria, classes: 'max-w-200', data_aid: 'collection-view-all-button'
+    %}"
+  to: "{% render 'armament-button' with url, url: collection.url, content: view_all_btn,
+    attributes: view_all_aria, classes: 'max-w-200', data_aid: 'collection-view-all-button'
+    %}"
+  position: 4141..4313
+{% endcomment %}

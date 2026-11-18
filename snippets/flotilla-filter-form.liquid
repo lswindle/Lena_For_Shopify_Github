@@ -37,10 +37,10 @@
 
 {% capture form_content %}
   <div class="w-full" data-armada-selector="filter-main-form">
-    {% render 'ship-filter-active-facets' with results: results, product_count: product_count, filter_position: filter_position, classes: facetClasses, enable_sorting: enable_sorting, enable_filtering: enable_filtering %}
+    {% render 'ship-filter-active-facets' with results, results: results, product_count: product_count, filter_position: filter_position, classes: facetClasses, enable_sorting: enable_sorting, enable_filtering: enable_filtering %}
     <div data-armada-selector="filter_button_wrapper" class="lg:hidden">
       <div data-armada-selector="filter_button_container" class="flex items-center w-full bg-page lg:hidden">
-        {% render 'armament-button' with content: filterBtnText, attributes: filterBtnAttrs, classes: applyFiltersClasses %}
+        {% render 'armament-button' with content, content: filterBtnText, attributes: filterBtnAttrs, classes: applyFiltersClasses %}
       </div>
     </div>
     <form class="w-full{% if filter_position == 'sidebar' %} lg:w-[270px]{% endif %}" {% if form_id %}id="{{ form_id }}"{% endif %}>
@@ -78,7 +78,7 @@
                   {% if value.count == 0 and value.active == false %}{% assign disabled = true %}{% endif %}
 
                   <div class="flex pb-3 flex-row-reverse justify-end items-center">
-                    {% render 'armament-input' with type: 'checkbox', id: input_id, name: value.param_name, value: value.value, has_label: true, label_text: value.label, classes: 'mr-3 appearance-none cursor-pointer active:bg-none checked:bg-none active:text-body checked:text-body checked:bg-current active:bg-body disabled:opacity-30', data_aid: data_aid, attributes: attrs, checked: checked, disabled: disabled, label_class: 'relative top-[0.5px] cursor-pointer' %}
+                    {% render 'armament-input' with type, type: 'checkbox', id: input_id, name: value.param_name, value: value.value, has_label: true, label_text: value.label, classes: 'mr-3 appearance-none cursor-pointer active:bg-none checked:bg-none active:text-body checked:text-body checked:bg-current active:bg-body disabled:opacity-30', data_aid: data_aid, attributes: attrs, checked: checked, disabled: disabled, label_class: 'relative top-[0.5px] cursor-pointer' %}
                   </div>
                 {% endfor %}
               </div>
@@ -100,7 +100,7 @@
                   {% if value.count == 0 and value.active == false %}{% assign disabled = true %}{% endif %}
 
                   <div class="flex mb-3 flex-row-reverse justify-end">
-                    {% render 'armament-input' with type: 'checkbox', id: input_id, name: value.param_name, value: value.value, has_label: true, label_text: value.label, classes: 'mr-3 appearance-none active:bg-none checked:bg-none active:text-body checked:text-body checked:bg-current active:bg-body disabled:opacity-30', data_aid: data_aid, attributes: attrs, checked: checked, disabled: disabled %}
+                    {% render 'armament-input' with type, type: 'checkbox', id: input_id, name: value.param_name, value: value.value, has_label: true, label_text: value.label, classes: 'mr-3 appearance-none active:bg-none checked:bg-none active:text-body checked:text-body checked:bg-current active:bg-body disabled:opacity-30', data_aid: data_aid, attributes: attrs, checked: checked, disabled: disabled %}
                   </div>
                 {% endfor %}
               {% endcapture %}
@@ -117,7 +117,7 @@
               {% endcapture %}
 
               {% assign detailAttributes = 'data-index="' | append: forloop.index | append: '"' %}
-              {% render 'armament-accordion' with summary_header: summary_header, summary_is_object: true, summary_object: summary_list_output, details_class: "js-filter", border_classes: 'opacity-20', has_top_border: true, data_aid: accordion_aid, attributes: detailAttributes %}
+              {% render 'armament-accordion' with summary_header, summary_header: summary_header, summary_is_object: true, summary_object: summary_list_output, details_class: "js-filter", border_classes: 'opacity-20', has_top_border: true, data_aid: accordion_aid, attributes: detailAttributes %}
 
             {% when 'price_range' %}
 
@@ -138,7 +138,7 @@
                         assign value = filter.min_value.value | money_without_currency | replace: ',', ''
                       endif
                     %}
-                    {% render 'armament-input' with type: 'number' has_label: true, label_class: '!font-body', animate_label: true, label_text: label_text, id: filter_id, placeholder: '0', min: '0', max: price_max, classes: 'w-full', value: value, name: filter.min_value.param_name, attributes: 'data-aid="filter-min-price" data-armada-selector="filter_price_from"', required: false %}
+                    {% render 'armament-input' with type, type: 'number', has_label: true, label_class: '!font-body', animate_label: true, label_text: label_text, id: filter_id, placeholder: '0', min: '0', max: price_max, classes: 'w-full', value: value, name: filter.min_value.param_name, attributes: 'data-aid="filter-min-price" data-armada-selector="filter_price_from"', required: false %}
                   </div>
                   <div class="col-start-2 col-end-3 row-start-1 row-end-2">
                     <label class="field__label" for="Filter-{{ filter.label | escape }}-LTE">{{ 'products.facets.max' | t }}</label>
@@ -150,12 +150,12 @@
                         assign value = filter.max_value.value | money_without_currency | replace: ',', ''
                       endif
                     %}
-                    {% render 'armament-input' with type: 'number' has_label: true, label_class: '!font-body', animate_label: true, label_text: label_text, id: filter_id, placeholder: max, min: '0', max: price_max, classes: 'w-full', value: value, name: filter.max_value.param_name, attributes: 'data-aid="filter-min-price" data-armada-selector="filter_price_to"', required: false %}
+                    {% render 'armament-input' with type, type: 'number', has_label: true, label_class: '!font-body', animate_label: true, label_text: label_text, id: filter_id, placeholder: max, min: '0', max: price_max, classes: 'w-full', value: value, name: filter.max_value.param_name, attributes: 'data-aid="filter-min-price" data-armada-selector="filter_price_to"', required: false %}
                   </div>
                 </price-range>
               {% endcapture %}
 
-              {% render 'armament-accordion' with summary_header: filter.label, summary_is_object: true, summary_content: filter_value.value, summary_object: summary_price_output, details_class: "js-filter", has_top_border: true, border_classes: 'opacity-20', data_aid: accordion_aid, attributes: detailAttributes %}
+              {% render 'armament-accordion' with summary_header, summary_header: filter.label, summary_is_object: true, summary_content: filter_value.value, summary_object: summary_price_output, details_class: "js-filter", has_top_border: true, border_classes: 'opacity-20', data_aid: accordion_aid, attributes: detailAttributes %}
           {% endcase %}
         {% endfor %}
       {% endif %}
@@ -181,4 +181,86 @@
   <safe-load-scripts>
     <script src="{{ 'engine-filter-and-sort.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="filter-and-sort"></script>
   </safe-load-scripts>
-{% endif %}
+{% endif %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'ship-filter-active-facets' with results: results, product_count:
+    product_count, filter_position: filter_position, classes: facetClasses, enable_sorting:
+    enable_sorting, enable_filtering: enable_filtering %}"
+  to: "{% render 'ship-filter-active-facets' with results, results: results, product_count:
+    product_count, filter_position: filter_position, classes: facetClasses, enable_sorting:
+    enable_sorting, enable_filtering: enable_filtering %}"
+  position: 2291..2517
+- from: "{% render 'armament-button' with content: filterBtnText, attributes: filterBtnAttrs,
+    classes: applyFiltersClasses %}"
+  to: "{% render 'armament-button' with content, content: filterBtnText, attributes:
+    filterBtnAttrs, classes: applyFiltersClasses %}"
+  position: 2709..2834
+- from: "{% render 'armament-input' with type: 'checkbox', id: input_id, name: value.param_name,
+    value: value.value, has_label: true, label_text: value.label, classes: 'mr-3 appearance-none
+    cursor-pointer active:bg-none checked:bg-none active:text-body checked:text-body
+    checked:bg-current active:bg-body disabled:opacity-30', data_aid: data_aid, attributes:
+    attrs, checked: checked, disabled: disabled, label_class: 'relative top-[0.5px]
+    cursor-pointer' %}"
+  to: "{% render 'armament-input' with type, type: 'checkbox', id: input_id, name:
+    value.param_name, value: value.value, has_label: true, label_text: value.label,
+    classes: 'mr-3 appearance-none cursor-pointer active:bg-none checked:bg-none active:text-body
+    checked:text-body checked:bg-current active:bg-body disabled:opacity-30', data_aid:
+    data_aid, attributes: attrs, checked: checked, disabled: disabled, label_class:
+    'relative top-[0.5px] cursor-pointer' %}"
+  position: 4777..5231
+- from: "{% render 'armament-input' with type: 'checkbox', id: input_id, name: value.param_name,
+    value: value.value, has_label: true, label_text: value.label, classes: 'mr-3 appearance-none
+    active:bg-none checked:bg-none active:text-body checked:text-body checked:bg-current
+    active:bg-body disabled:opacity-30', data_aid: data_aid, attributes: attrs, checked:
+    checked, disabled: disabled %}"
+  to: "{% render 'armament-input' with type, type: 'checkbox', id: input_id, name:
+    value.param_name, value: value.value, has_label: true, label_text: value.label,
+    classes: 'mr-3 appearance-none active:bg-none checked:bg-none active:text-body
+    checked:text-body checked:bg-current active:bg-body disabled:opacity-30', data_aid:
+    data_aid, attributes: attrs, checked: checked, disabled: disabled %}"
+  position: 6289..6676
+- from: '{% render ''armament-accordion'' with summary_header: summary_header, summary_is_object:
+    true, summary_object: summary_list_output, details_class: "js-filter", border_classes:
+    ''opacity-20'', has_top_border: true, data_aid: accordion_aid, attributes: detailAttributes
+    %}'
+  to: '{% render ''armament-accordion'' with summary_header, summary_header: summary_header,
+    summary_is_object: true, summary_object: summary_list_output, details_class: "js-filter",
+    border_classes: ''opacity-20'', has_top_border: true, data_aid: accordion_aid,
+    attributes: detailAttributes %}'
+  position: 7381..7663
+- from: '{% render ''armament-input'' with type: ''number'' has_label: true, label_class:
+    ''!font-body'', animate_label: true, label_text: label_text, id: filter_id, placeholder:
+    ''0'', min: ''0'', max: price_max, classes: ''w-full'', value: value, name: filter.min_value.param_name,
+    attributes: ''data-aid="filter-min-price" data-armada-selector="filter_price_from"'',
+    required: false %}'
+  to: '{% render ''armament-input'' with type, type: ''number'', has_label: true,
+    label_class: ''!font-body'', animate_label: true, label_text: label_text, id:
+    filter_id, placeholder: ''0'', min: ''0'', max: price_max, classes: ''w-full'',
+    value: value, name: filter.min_value.param_name, attributes: ''data-aid="filter-min-price"
+    data-armada-selector="filter_price_from"'', required: false %}'
+  position: 8730..9102
+- from: '{% render ''armament-input'' with type: ''number'' has_label: true, label_class:
+    ''!font-body'', animate_label: true, label_text: label_text, id: filter_id, placeholder:
+    max, min: ''0'', max: price_max, classes: ''w-full'', value: value, name: filter.max_value.param_name,
+    attributes: ''data-aid="filter-min-price" data-armada-selector="filter_price_to"'',
+    required: false %}'
+  to: '{% render ''armament-input'' with type, type: ''number'', has_label: true,
+    label_class: ''!font-body'', animate_label: true, label_text: label_text, id:
+    filter_id, placeholder: max, min: ''0'', max: price_max, classes: ''w-full'',
+    value: value, name: filter.max_value.param_name, attributes: ''data-aid="filter-min-price"
+    data-armada-selector="filter_price_to"'', required: false %}'
+  position: 9879..10249
+- from: '{% render ''armament-accordion'' with summary_header: filter.label, summary_is_object:
+    true, summary_content: filter_value.value, summary_object: summary_price_output,
+    details_class: "js-filter", has_top_border: true, border_classes: ''opacity-20'',
+    data_aid: accordion_aid, attributes: detailAttributes %}'
+  to: '{% render ''armament-accordion'' with summary_header, summary_header: filter.label,
+    summary_is_object: true, summary_content: filter_value.value, summary_object:
+    summary_price_output, details_class: "js-filter", has_top_border: true, border_classes:
+    ''opacity-20'', data_aid: accordion_aid, attributes: detailAttributes %}'
+  position: 10352..10670
+{%- endcomment -%}

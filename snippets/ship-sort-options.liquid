@@ -24,7 +24,24 @@
       {% else %}
         {% assign attr = '' %}
       {% endif %}
-      {% render 'armament-radio-item' with id: option_id, name: 'sort_by', value: option_name, attributes: attr, label_text: option.name, classes: 'cursor-pointer appearance-none bg-page active:bg-none checked:bg-none active:text-body checked:text-body checked:bg-current active:bg-body', label_class: 'cursor-pointer', data_aid: option_name %}
+      {% render 'armament-radio-item' with id, id: option_id, name: 'sort_by', value: option_name, attributes: attr, label_text: option.name, classes: 'cursor-pointer appearance-none bg-page active:bg-none checked:bg-none active:text-body checked:text-body checked:bg-current active:bg-body', label_class: 'cursor-pointer', data_aid: option_name %}
     {% endfor %}
   </form>
-</sort-form>
+</sort-form>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-radio-item' with id: option_id, name: 'sort_by', value:
+    option_name, attributes: attr, label_text: option.name, classes: 'cursor-pointer
+    appearance-none bg-page active:bg-none checked:bg-none active:text-body checked:text-body
+    checked:bg-current active:bg-body', label_class: 'cursor-pointer', data_aid: option_name
+    %}"
+  to: "{% render 'armament-radio-item' with id, id: option_id, name: 'sort_by', value:
+    option_name, attributes: attr, label_text: option.name, classes: 'cursor-pointer
+    appearance-none bg-page active:bg-none checked:bg-none active:text-body checked:text-body
+    checked:bg-current active:bg-body', label_class: 'cursor-pointer', data_aid: option_name
+    %}"
+  position: 1155..1497
+{%- endcomment -%}

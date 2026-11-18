@@ -39,13 +39,13 @@
 
   <div id="sharing" class="flex flex-col pb-3 md:pb-4{% if alignment == 'right' %} text-right{% endif %}" data-permalink="{{ permalinkURL }}" {% if shopify_attributes %}{{ shopify_attributes }}{% endif %}>
     {% assign share_heading = 'blogs.article.share' | t %}
-    {% render 'armament-heading' with heading_content: share_heading, classes: 'mb-2', heading_type: 'heading-5', data_aid: 'social-share-heading' %}
+    {% render 'armament-heading' with heading_content, heading_content: share_heading, classes: 'mb-2', heading_type: 'heading-5', data_aid: 'social-share-heading' %}
 
     <div class="flex flex-row {{ container_alignment_class }}">
       {% if show_facebook %}
       <!-- https://developers.facebook.com/docs/plugins/share-button/ -->
       <a target="_blank" rel="nopener noreferrer" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" class="group p-3">
-        {% render 'armament-icon' with icon: 'facebook' %}
+        {% render 'armament-icon' with icon, icon: 'facebook' %}
         <span class="sr-only">Share on Facebook</span>
       </a>
       {% endif %}
@@ -53,7 +53,7 @@
       {% if show_twitter %}
       <!-- https://dev.twitter.com/docs/intents -->
       <a target="_blank" rel="nopener noreferrer" href="//twitter.com/share?url={{ permalinkURL }}&amp;text={{ shareTitle | escape }}" class="group p-3">
-        {% render 'armament-icon' with icon: 'twitter' %}
+        {% render 'armament-icon' with icon, icon: 'twitter' %}
         <span class="sr-only">Tweet</span>
       </a>
       {% endif %}
@@ -65,7 +65,7 @@
       -->
 
       <a target="_blank" rel="nopener noreferrer" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media={{ shareImage }}&amp;description={{ shareTitle | escape }}" class="group p-3">
-        {% render 'armament-icon' with icon: 'pinterest' %}
+        {% render 'armament-icon' with icon, icon: 'pinterest' %}
         <span class="sr-only">Pin it</span>
       </a>
       {% endif %}
@@ -73,3 +73,24 @@
   </div>
 
 {% endif %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-heading' with heading_content: share_heading, classes:
+    'mb-2', heading_type: 'heading-5', data_aid: 'social-share-heading' %}"
+  to: "{% render 'armament-heading' with heading_content, heading_content: share_heading,
+    classes: 'mb-2', heading_type: 'heading-5', data_aid: 'social-share-heading' %}"
+  position: 1692..1854
+- from: "{% render 'armament-icon' with icon: 'facebook' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'facebook' %}"
+  position: 2158..2214
+- from: "{% render 'armament-icon' with icon: 'twitter' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'twitter' %}"
+  position: 2542..2597
+- from: "{% render 'armament-icon' with icon: 'pinterest' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'pinterest' %}"
+  position: 3055..3112
+{% endcomment %}

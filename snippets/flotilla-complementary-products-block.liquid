@@ -17,7 +17,7 @@
 
 <div data-aid="complementary-products-block" data-color-scheme="{{ color_scheme }}" class="bg-page text-body mb-3 lg:mb-4 {% unless color_scheme == 'general' %}px-3 py-4 md:px-4{% endunless %}{% if container_classes %} {{ container_classes }}{% endif %}">
   {% if block_settings.title != blank %}
-    {% render 'armament-heading' with tag: 'h3', heading_content: block_settings.title, heading_type: 'heading-5', data_aid: 'complementary-products-heading', classes: 'pb-2' %}
+    {% render 'armament-heading' with tag, tag: 'h3', heading_content: block_settings.title, heading_type: 'heading-5', data_aid: 'complementary-products-heading', classes: 'pb-2' %}
   {% endif %}
 
   <complementary-products class="block bg-page" data-aid="complementary-product-recommendations" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ block_settings.products_to_show }}&intent=complementary" data-color-scheme="{{ color_scheme }}">
@@ -32,13 +32,7 @@
                 {% assign enable_slider = false %}
               {% endif %}
               <li data-name="slide" slide-num="{{ forloop.index }}" class="block relative place-content-center md:pr-2" data-aid="product-recommendations-item">
-                {%
-                   render 'ship-product-card' with
-                   card_product: recommendation,
-                   align: settings.product_info_position,
-                   aspect_ratio: settings.product_cards_aspect_ratio,
-                   classes: 'w-full'
-                 %}
+                {% render 'ship-product-card' with card_product, card_product: recommendation, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio, classes: 'w-full' %}
               </li>
             {% endfor %}
           </ul>
@@ -48,9 +42,9 @@
           {% if enable_slider == false %}
             {% assign arrow_classes = 'md:hidden' %}
           {% endif %}
-          {% render 'armament-slider-arrows' with hide_on_mobile: true, classes: arrow_classes %}
+          {% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true, classes: arrow_classes %}
           <div data-name="mobile-indicator" class="block md:hidden">
-            {% render 'armament-scroll-bar' with classes: 'p-4', item_count: block_settings.products_to_show, parent: 'slider-engine', target: 'slider', indicator: 'progress' %}
+            {% render 'armament-scroll-bar' with classes, classes: 'p-4', item_count: block_settings.products_to_show, parent: 'slider-engine', target: 'slider', indicator: 'progress' %}
           </div>
         </template>
 
@@ -58,3 +52,39 @@
     {% endif %}
   </complementary-products>
 </div>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-heading' with tag: 'h3', heading_content: block_settings.title,
+    heading_type: 'heading-5', data_aid: 'complementary-products-heading', classes:
+    'pb-2' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h3', heading_content: block_settings.title,
+    heading_type: 'heading-5', data_aid: 'complementary-products-heading', classes:
+    'pb-2' %}"
+  position: 1088..1266
+- from: |-
+    {%
+                       render 'ship-product-card' with
+                       card_product: recommendation,
+                       align: settings.product_info_position,
+                       aspect_ratio: settings.product_cards_aspect_ratio,
+                       classes: 'w-full'
+                     %}
+  to: "{% render 'ship-product-card' with card_product, card_product: recommendation,
+    align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio,
+    classes: 'w-full' %}"
+  position: 2569..2758
+- from: "{% render 'armament-slider-arrows' with hide_on_mobile: true, classes: arrow_classes
+    %}"
+  to: "{% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true,
+    classes: arrow_classes %}"
+  position: 2982..3085
+- from: "{% render 'armament-scroll-bar' with classes: 'p-4', item_count: block_settings.products_to_show,
+    parent: 'slider-engine', target: 'slider', indicator: 'progress' %}"
+  to: "{% render 'armament-scroll-bar' with classes, classes: 'p-4', item_count: block_settings.products_to_show,
+    parent: 'slider-engine', target: 'slider', indicator: 'progress' %}"
+  position: 3167..3341
+{% endcomment %}

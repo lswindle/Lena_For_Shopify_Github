@@ -25,13 +25,13 @@
   {% endif %}
 
     {% if icon_image %}
-      {% render 'armament-thumbnail' with url: icon_image, width: 100, class: 'inline-block mb-2 md:mb-3 max-h-[100px] max-w-[100px] object-contain' %}
+      {% render 'armament-thumbnail' with url, url: icon_image, width: 100, class: 'inline-block mb-2 md:mb-3 max-h-[100px] max-w-[100px] object-contain' %}
     {% else %}
-      {% render 'armament-placeholder' with name: 'product-1', classes: 'inline-block mb-2 md:mb-3 h-5 w-5' %}
+      {% render 'armament-placeholder' with name, name: 'product-1', classes: 'inline-block mb-2 md:mb-3 h-5 w-5' %}
     {% endif %}
 
     {% if heading %}
-      {% render 'armament-heading' with tag: 'h3', heading_type: 'heading-4', classes: 'mb-2', heading_content: heading, data_aid: 'icon-text-card-heading' %}
+      {% render 'armament-heading' with tag, tag: 'h3', heading_type: 'heading-4', classes: 'mb-2', heading_content: heading, data_aid: 'icon-text-card-heading' %}
     {% endif %}
 
     {% if text %}
@@ -42,3 +42,26 @@
     </a>
   {% endif %}
 </div>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-thumbnail' with url: icon_image, width: 100, class: 'inline-block
+    mb-2 md:mb-3 max-h-[100px] max-w-[100px] object-contain' %}"
+  to: "{% render 'armament-thumbnail' with url, url: icon_image, width: 100, class:
+    'inline-block mb-2 md:mb-3 max-h-[100px] max-w-[100px] object-contain' %}"
+  position: 1006..1156
+- from: "{% render 'armament-placeholder' with name: 'product-1', classes: 'inline-block
+    mb-2 md:mb-3 h-5 w-5' %}"
+  to: "{% render 'armament-placeholder' with name, name: 'product-1', classes: 'inline-block
+    mb-2 md:mb-3 h-5 w-5' %}"
+  position: 1178..1288
+- from: "{% render 'armament-heading' with tag: 'h3', heading_type: 'heading-4', classes:
+    'mb-2', heading_content: heading, data_aid: 'icon-text-card-heading' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h3', heading_type: 'heading-4',
+    classes: 'mb-2', heading_content: heading, data_aid: 'icon-text-card-heading'
+    %}"
+  position: 1333..1490
+{% endcomment %}

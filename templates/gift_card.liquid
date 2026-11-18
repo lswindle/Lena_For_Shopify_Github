@@ -52,11 +52,11 @@
 
     <main class="p-4 md:p-6">
       {% assign titleString = 'gift_cards.issued.title' | t %}
-      {% render 'armament-heading' with tag: 'h1', heading_content: titleString, heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'gift-card-title' %}
+      {% render 'armament-heading' with tag, tag: 'h1', heading_content: titleString, heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'gift-card-title' %}
 
       {% assign valueString = gift_card.initial_value | money %}
       {% assign subtextString = 'gift_cards.issued.subtext' | t: value: valueString %}
-      {% render 'armament-heading' with tag: 'h2', heading_content: subtextString, heading_type: 'heading-2', classes: 'mb-4 md:mb-5', data_aid: 'gift-card-subtext' %}
+      {% render 'armament-heading' with tag, tag: 'h2', heading_content: subtextString, heading_type: 'heading-2', classes: 'mb-4 md:mb-5', data_aid: 'gift-card-subtext' %}
 
       {%- if gift_card.enabled == false or gift_card.expired -%}
         <p>{{ 'gift_cards.issued.expired' | t }}</p>
@@ -100,11 +100,45 @@
 
       <div class="flex justify-center gap-3 md:gap-4">
         {% assign printString = 'gift_cards.issued.print_gift_card' | t %}
-        {% render 'armament-button' with type: 'button', content: printString, attributes: "onclick='window.print();'", style: 'outline', data_aid: "gift-card-print-button" %}
+        {% render 'armament-button' with type, type: 'button', content: printString, attributes: "onclick='window.print();'", style: 'outline', data_aid: "gift-card-print-button" %}
 
         {% assign shopString = 'gift_cards.issued.shop_link' | t %}
-        {% render 'armament-button' with url: shop.url, content: shopString, attributes: "target='_blank' rel='noopener'", data_aid: "gift-card-shop-button" %}
+        {% render 'armament-button' with url, url: shop.url, content: shopString, attributes: "target='_blank' rel='noopener'", data_aid: "gift-card-shop-button" %}
       </div>
     </main>
   </body>
 </html>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-heading' with tag: 'h1', heading_content: titleString,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'gift-card-title'
+    %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h1', heading_content: titleString,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'gift-card-title'
+    %}"
+  position: 1958..2120
+- from: "{% render 'armament-heading' with tag: 'h2', heading_content: subtextString,
+    heading_type: 'heading-2', classes: 'mb-4 md:mb-5', data_aid: 'gift-card-subtext'
+    %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: subtextString,
+    heading_type: 'heading-2', classes: 'mb-4 md:mb-5', data_aid: 'gift-card-subtext'
+    %}"
+  position: 2280..2446
+- from: '{% render ''armament-button'' with type: ''button'', content: printString,
+    attributes: "onclick=''window.print();''", style: ''outline'', data_aid: "gift-card-print-button"
+    %}'
+  to: '{% render ''armament-button'' with type, type: ''button'', content: printString,
+    attributes: "onclick=''window.print();''", style: ''outline'', data_aid: "gift-card-print-button"
+    %}'
+  position: 4298..4471
+- from: '{% render ''armament-button'' with url: shop.url, content: shopString, attributes:
+    "target=''_blank'' rel=''noopener''", data_aid: "gift-card-shop-button" %}'
+  to: '{% render ''armament-button'' with url, url: shop.url, content: shopString,
+    attributes: "target=''_blank'' rel=''noopener''", data_aid: "gift-card-shop-button"
+    %}'
+  position: 4549..4705
+{% endcomment %}

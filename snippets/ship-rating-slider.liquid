@@ -15,6 +15,26 @@
 <div
   {% if classes %}class="{{ classes }}"{% endif %}
 >
-  {% render 'armament-heading' with tag: 'h2', heading_type: 'heading-5', classes: 'mb-2', heading_content: rating_name, data_aid: 'rating-slider-heading' %}
-  {% render 'armament-rating-slider' with min: min, max: max, rating: rating, rating_name: rating_name, label_left: label_left, label_center: label_center, label_right: label_right %}
+  {% render 'armament-heading' with tag, tag: 'h2', heading_type: 'heading-5', classes: 'mb-2', heading_content: rating_name, data_aid: 'rating-slider-heading' %}
+  {% render 'armament-rating-slider' with min, min: min, max: max, rating: rating, rating_name: rating_name, label_left: label_left, label_center: label_center, label_right: label_right %}
 </div>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-heading' with tag: 'h2', heading_type: 'heading-5', classes:
+    'mb-2', heading_content: rating_name, data_aid: 'rating-slider-heading' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_type: 'heading-5',
+    classes: 'mb-2', heading_content: rating_name, data_aid: 'rating-slider-heading'
+    %}"
+  position: 851..1011
+- from: "{% render 'armament-rating-slider' with min: min, max: max, rating: rating,
+    rating_name: rating_name, label_left: label_left, label_center: label_center,
+    label_right: label_right %}"
+  to: "{% render 'armament-rating-slider' with min, min: min, max: max, rating: rating,
+    rating_name: rating_name, label_left: label_left, label_center: label_center,
+    label_right: label_right %}"
+  position: 1014..1200
+{% endcomment %}

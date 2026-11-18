@@ -29,12 +29,7 @@
 
     {%- if address == customer.default_address -%}
         {% assign defaultAddressString = 'customer.addresses.default' | t %}
-        {% render 'armament-heading' with
-        tag: 'h4',
-        heading_content: defaultAddressString,
-        heading_type: 'heading-4',
-        data_aid: "address-default-heading",
-        classes: 'mb-2' %}
+        {% render 'armament-heading' with tag, tag: 'h4', heading_content: defaultAddressString, heading_type: 'heading-4', data_aid: "address-default-heading", classes: 'mb-2' %}
     {%- endif -%}
 
     <div class="my-2" data-aid="address">
@@ -44,7 +39,7 @@
     {% if isLi %}
         {% assign address_id = address.id %}
         <address-card-form class="inline-block my-2" address-id="{{ address_id }}">
-            {% render 'ship-address-form' with address: address, changes_default_only: true %}
+            {% render 'ship-address-form' with address, address: address, changes_default_only: true %}
         </address-card-form>
 
         <div class="flex flex-row gap-3 mt-2">
@@ -53,11 +48,7 @@
             class="flex justify-center md:justify-end" data-aid="edit-address-btn-container"
             >
                 {% assign editAddressString = 'customer.addresses.edit_address' | t %}
-                {% render 'armament-button' with
-                content: editAddressString,
-                data_aid: 'edit-address-btn',
-                style: 'filled',
-                attributes: 'data-armada-selector="modal-open"' %}
+                {% render 'armament-button' with content, content: editAddressString, data_aid: 'edit-address-btn', style: 'filled', attributes: 'data-armada-selector="modal-open"' %}
             </armada-modal-open>
             {% assign editAddress = 'customer.addresses.edit_address' | t %}
             <armada-modal
@@ -67,7 +58,7 @@
             data-modal-underlay-classes="bg-black opacity-60"
             class="invisible opacity-0"
             >
-            {% render 'ship-address-form' with address: address %}
+            {% render 'ship-address-form' with address, address: address %}
             </armada-modal>
             <safe-load-scripts>
                 <script src="{{ 'engine-modal-open.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="modal-open"></script>
@@ -83,13 +74,7 @@
                     data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}"
                 >
                     {% assign deleteAddressString = 'customer.addresses.delete' | t %}
-                    {% render 'armament-button' with
-                    classes: 'flex items-center justify-center'
-                    content: deleteAddressString,
-                    data_aid: 'delete_address_btn',
-                    style: 'outline',
-                    icon_position_class: 'top-auto left-auto'
-                    loading: true %}
+                    {% render 'armament-button' with classes, classes: 'flex items-center justify-center', content: deleteAddressString, data_aid: 'delete_address_btn', style: 'outline', icon_position_class: 'top-auto left-auto', loading: true %}
                 </form>
             </delete-address>
 
@@ -101,4 +86,51 @@
         <a class="inline-block text-right font-heading heading-case underline hover:no-underline" href="{{ routes.account_addresses_url }}">{{ 'customer.addresses.manage_addresses' | t }} ({{ customer.addresses_count }})</a>
     {% endif %}
 
-</{{ tag }}>
+</{{ tag }}>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with
+            tag: 'h4',
+            heading_content: defaultAddressString,
+            heading_type: 'heading-4',
+            data_aid: "address-default-heading",
+            classes: 'mb-2' %}
+  to: '{% render ''armament-heading'' with tag, tag: ''h4'', heading_content: defaultAddressString,
+    heading_type: ''heading-4'', data_aid: "address-default-heading", classes: ''mb-2''
+    %}'
+  position: 1039..1210
+- from: "{% render 'ship-address-form' with address: address, changes_default_only:
+    true %}"
+  to: "{% render 'ship-address-form' with address, address: address, changes_default_only:
+    true %}"
+  position: 1482..1573
+- from: |-
+    {% render 'armament-button' with
+                    content: editAddressString,
+                    data_aid: 'edit-address-btn',
+                    style: 'filled',
+                    attributes: 'data-armada-selector="modal-open"' %}
+  to: '{% render ''armament-button'' with content, content: editAddressString, data_aid:
+    ''edit-address-btn'', style: ''filled'', attributes: ''data-armada-selector="modal-open"''
+    %}'
+  position: 1956..2123
+- from: "{% render 'ship-address-form' with address: address %}"
+  to: "{% render 'ship-address-form' with address, address: address %}"
+  position: 2545..2608
+- from: |-
+    {% render 'armament-button' with
+                        classes: 'flex items-center justify-center'
+                        content: deleteAddressString,
+                        data_aid: 'delete_address_btn',
+                        style: 'outline',
+                        icon_position_class: 'top-auto left-auto'
+                        loading: true %}
+  to: "{% render 'armament-button' with classes, classes: 'flex items-center justify-center',
+    content: deleteAddressString, data_aid: 'delete_address_btn', style: 'outline',
+    icon_position_class: 'top-auto left-auto', loading: true %}"
+  position: 3410..3636
+{%- endcomment -%}

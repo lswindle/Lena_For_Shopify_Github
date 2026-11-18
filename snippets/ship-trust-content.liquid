@@ -30,12 +30,12 @@
 
           {% if block.settings[icon_image] %}
             <div class="flex-shrink-0">
-              {% render 'armament-thumbnail' with url: block.settings[icon_image], class: 'inline-block md:mb-2 mr-2 md:mr-0 max-h-[250px] max-w-[250px] object-contain' %}
+              {% render 'armament-thumbnail' with url, url: block.settings[icon_image], class: 'inline-block md:mb-2 mr-2 md:mr-0 max-h-[250px] max-w-[250px] object-contain' %}
             </div>
           {% endif %}
 
           {% if block.settings[heading] != blank %}
-            {% render 'armament-heading' with tag: 'h3', heading_type: 'heading-5', heading_content: block.settings[heading], data_aid: 'trust-content-heading' %}
+            {% render 'armament-heading' with tag, tag: 'h3', heading_type: 'heading-5', heading_content: block.settings[heading], data_aid: 'trust-content-heading' %}
           {% endif %}
 
         {% if block.settings[link] %}
@@ -46,3 +46,22 @@
     {% endif %}
   {% endfor %}
 </ul>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-thumbnail' with url: block.settings[icon_image], class:
+    'inline-block md:mb-2 mr-2 md:mr-0 max-h-[250px] max-w-[250px] object-contain'
+    %}"
+  to: "{% render 'armament-thumbnail' with url, url: block.settings[icon_image], class:
+    'inline-block md:mb-2 mr-2 md:mr-0 max-h-[250px] max-w-[250px] object-contain'
+    %}"
+  position: 1472..1634
+- from: "{% render 'armament-heading' with tag: 'h3', heading_type: 'heading-5', heading_content:
+    block.settings[heading], data_aid: 'trust-content-heading' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h3', heading_type: 'heading-5',
+    heading_content: block.settings[heading], data_aid: 'trust-content-heading' %}"
+  position: 1741..1896
+{% endcomment %}

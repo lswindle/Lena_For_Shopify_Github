@@ -31,10 +31,10 @@
       {% if subheading != blank or heading != blank %}
         <div class="p-4 md:p-6 md:pb-5{% if headings_text_alignment == 'center' %} text-center{% elsif headings_text_alignment == 'right' %} text-right{% endif %}">
           {% if subheading != blank %}
-            {% render 'armament-heading' with tag: 'h4', heading_content: subheading, heading_type: 'heading-4', classes: 'mb-2 md:mb-3' %}
+            {% render 'armament-heading' with tag, tag: 'h4', heading_content: subheading, heading_type: 'heading-4', classes: 'mb-2 md:mb-3' %}
           {% endif %}
           {% if heading != blank %}
-            {% render 'armament-heading' with tag: 'h2', heading_content: heading, heading_type: 'section-heading' %}
+            {% render 'armament-heading' with tag, tag: 'h2', heading_content: heading, heading_type: 'section-heading' %}
           {% endif %}
         </div>
       {% endif %}
@@ -60,20 +60,7 @@
             <li loadin-animation-elm loadin-animation-delay {{ block.shopify_attributes }}>
               {% assign card_text = block.settings.collection_heading | default: block.settings.collection.title %}
               {% assign card_url =  block.settings.collection.url | default: '/' %}
-              {% render 'ship-visual-card' with
-                card_image: block.settings.collection.featured_image,
-                card_text: card_text,
-                button_label: block.settings.button_label,
-                button_style: block.settings.button_style,
-                url: card_url,
-                overlay_color_scheme: block.settings.text_overlay_color_scheme,
-                horizontal_alignment: horizontal_text_alignment,
-                mobile_center_align: mobile_center_align,
-                vertical_alignment: vertical_text_alignment,
-                overlay_style: block.settings.overlay_color_scheme,
-                overlay_opacity: block.settings.overlay_opacity,
-                placeholder: 'collection-1'
-              %}
+              {% render 'ship-visual-card' with card_image, card_image: block.settings.collection.featured_image, card_text: card_text, button_label: block.settings.button_label, button_style: block.settings.button_style, url: card_url, overlay_color_scheme: block.settings.text_overlay_color_scheme, horizontal_alignment: horizontal_text_alignment, mobile_center_align: mobile_center_align, vertical_alignment: vertical_text_alignment, overlay_style: block.settings.overlay_color_scheme, overlay_opacity: block.settings.overlay_opacity, placeholder: 'collection-1' %}
             </li>
           {% endfor %}
         {% else %}
@@ -83,20 +70,7 @@
               assign button_text = buttons[forloop.index0] | default: button_label
             -%}
             <li loadin-animation-elm loadin-animation-delay>
-              {% render 'ship-visual-card' with
-                card_image: collection.featured_image,
-                card_text: card_text,
-                button_label: button_text,
-                button_style: button_style,
-                url: collection.url,
-                overlay_color_scheme: text_overlay_color_scheme,
-                horizontal_alignment: horizontal_text_alignment,
-                mobile_center_align: mobile_center_align,
-                vertical_alignment: vertical_text_alignment,
-                overlay_style: overlay_color_scheme,
-                overlay_opacity: overlay_opacity,
-                placeholder: 'collection-1'
-              %}
+              {% render 'ship-visual-card' with card_image, card_image: collection.featured_image, card_text: card_text, button_label: button_text, button_style: button_style, url: collection.url, overlay_color_scheme: text_overlay_color_scheme, horizontal_alignment: horizontal_text_alignment, mobile_center_align: mobile_center_align, vertical_alignment: vertical_text_alignment, overlay_style: overlay_color_scheme, overlay_opacity: overlay_opacity, placeholder: 'collection-1' %}
             </li>
           {% endfor %}
         {% endif %}
@@ -112,3 +86,64 @@
   {% endif %}
 
 </section>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-heading' with tag: 'h4', heading_content: subheading,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h4', heading_content: subheading,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3' %}"
+  position: 1200..1332
+- from: "{% render 'armament-heading' with tag: 'h2', heading_content: heading, heading_type:
+    'section-heading' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: heading,
+    heading_type: 'section-heading' %}"
+  position: 1403..1513
+- from: |-
+    {% render 'ship-visual-card' with
+                    card_image: block.settings.collection.featured_image,
+                    card_text: card_text,
+                    button_label: block.settings.button_label,
+                    button_style: block.settings.button_style,
+                    url: card_url,
+                    overlay_color_scheme: block.settings.text_overlay_color_scheme,
+                    horizontal_alignment: horizontal_text_alignment,
+                    mobile_center_align: mobile_center_align,
+                    vertical_alignment: vertical_text_alignment,
+                    overlay_style: block.settings.overlay_color_scheme,
+                    overlay_opacity: block.settings.overlay_opacity,
+                    placeholder: 'collection-1'
+                  %}
+  to: "{% render 'ship-visual-card' with card_image, card_image: block.settings.collection.featured_image,
+    card_text: card_text, button_label: block.settings.button_label, button_style:
+    block.settings.button_style, url: card_url, overlay_color_scheme: block.settings.text_overlay_color_scheme,
+    horizontal_alignment: horizontal_text_alignment, mobile_center_align: mobile_center_align,
+    vertical_alignment: vertical_text_alignment, overlay_style: block.settings.overlay_color_scheme,
+    overlay_opacity: block.settings.overlay_opacity, placeholder: 'collection-1' %}"
+  position: 2883..3437
+- from: |-
+    {% render 'ship-visual-card' with
+                    card_image: collection.featured_image,
+                    card_text: card_text,
+                    button_label: button_text,
+                    button_style: button_style,
+                    url: collection.url,
+                    overlay_color_scheme: text_overlay_color_scheme,
+                    horizontal_alignment: horizontal_text_alignment,
+                    mobile_center_align: mobile_center_align,
+                    vertical_alignment: vertical_text_alignment,
+                    overlay_style: overlay_color_scheme,
+                    overlay_opacity: overlay_opacity,
+                    placeholder: 'collection-1'
+                  %}
+  to: "{% render 'ship-visual-card' with card_image, card_image: collection.featured_image,
+    card_text: card_text, button_label: button_text, button_style: button_style, url:
+    collection.url, overlay_color_scheme: text_overlay_color_scheme, horizontal_alignment:
+    horizontal_text_alignment, mobile_center_align: mobile_center_align, vertical_alignment:
+    vertical_text_alignment, overlay_style: overlay_color_scheme, overlay_opacity:
+    overlay_opacity, placeholder: 'collection-1' %}"
+  position: 3827..4296
+{% endcomment %}

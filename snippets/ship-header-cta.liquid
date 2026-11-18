@@ -33,29 +33,29 @@
 
   <noscript>
     {% if section.settings.enable_search %}
-      {% render 'armament-icon' with icon: 'search', classes: 'cursor-pointer', has_link: true, link_href: routes.search_url, link_label: aria_search, link_classes: 'header-mobile-search flex lg:hidden w-44 h-44 items-center lg:justify-center' %}
+      {% render 'armament-icon' with icon, icon: 'search', classes: 'cursor-pointer', has_link: true, link_href: routes.search_url, link_label: aria_search, link_classes: 'header-mobile-search flex lg:hidden w-44 h-44 items-center lg:justify-center' %}
     {% endif %}
   </noscript>
   <div {% if section.settings.enable_search %}onclick="loadSearchScripts();loadQuickSearch()"{% endif %} class="header-mobile-search flex lg:hidden w-44 h-44 items-center lg:justify-center group cursor-pointer{% if template.name == 'search' %} pointer-events-none{% endif %}" data-armada-selector="search_toggle"{% if template.name == 'search' %} aria-hidden="true"{% else %} tabindex="0"{% endif %}>
     {% if section.settings.enable_search %}
-      {% render 'armament-icon' with icon: 'search', has_link: false %}
+      {% render 'armament-icon' with icon, icon: 'search', has_link: false %}
     {% endif %}
   </div>
 
 <div class="flex items-center lg:justify-end" style="grid-area:cta;" data-armada-selector="header-cta-container">
   <div data-armada-selector="header-locale-selectors" class="hidden w-full items-end gap-3 lg:mr-3 lg:w-auto justify-end lg:flex pt-3 px-4 lg:p-0 {% unless settings.enable_animations %} disable-animation{% endunless %}">
-    {% render 'armament-localization-selector' with show_country: section.settings.show_country, show_languages: section.settings.show_languages, classes: 'font-heading', country_attributes: 'style="grid-area:cta;"' %}
+    {% render 'armament-localization-selector' with show_country, show_country: section.settings.show_country, show_languages: section.settings.show_languages, classes: 'font-heading', country_attributes: 'style="grid-area:cta;"' %}
   </div>
 
   {% if section.settings.enable_search and section.settings.show_icons %}
     <noscript>
       <div class="header-search hidden lg:flex w-44 h-44 items-center lg:justify-center group cursor-pointer{% if template.name == 'search' %} pointer-events-none{% endif %}" data-armada-selector="search_toggle"{% if template.name == 'search' %} aria-hidden="true"{% else %} tabindex="0"{% endif %} aria-label="{{ aria_search }}">
-        <a href="{{ routes.search_url }}">{% render 'armament-icon' with icon: 'search', has_link: false %}</a>
+        <a href="{{ routes.search_url }}">{% render 'armament-icon' with icon, icon: 'search', has_link: false %}</a>
       </div>
     </noscript>
     <div {% if section.settings.enable_search %}onclick="loadSearchScripts();loadQuickSearch()"{% endif %} class="header-search hidden lg:flex w-44 h-44 items-center lg:justify-center no-js-hidden group cursor-pointer{% if template.name == 'search' %} pointer-events-none{% endif %}" data-armada-selector="search_toggle"{% if template.name == 'search' %} aria-hidden="true"{% else %} tabindex="0"{% endif %} aria-label="{{ aria_search }}">
       {% if section.settings.enable_search %}
-        {% render 'armament-icon' with icon: 'search', has_link: false %}
+        {% render 'armament-icon' with icon, icon: 'search', has_link: false %}
       {% endif %}
     </div>
   {% elsif section.settings.enable_search and section.settings.show_icons == false %}
@@ -98,12 +98,12 @@
   {% endif %}
 
   <div>
-    {% render 'armament-icon' with icon: 'account', classes: 'cursor-pointer', has_link: true, link_href: routes.account_url, link_label: aria_account, link_classes: account_classes %}
+    {% render 'armament-icon' with icon, icon: 'account', classes: 'cursor-pointer', has_link: true, link_href: routes.account_url, link_label: aria_account, link_classes: account_classes %}
   </div>
 
   {% comment %} TODO: this should be a web component? {% endcomment %}
   <div class="relative">
-    {% render 'armament-icon' with icon: 'bag', classes: 'cursor-pointer', has_link: true, link_href: routes.cart_url, link_label: aria_cart, link_classes: bag_classes %}
+    {% render 'armament-icon' with icon, icon: 'bag', classes: 'cursor-pointer', has_link: true, link_href: routes.cart_url, link_label: aria_cart, link_classes: bag_classes %}
     <div class="{{ count_classes }}">
       {{ cart_count }}
     </div>
@@ -125,4 +125,49 @@
       import("{{ 'engine-quick-search.min.js' | asset_url }}");
     }
   </script>
-{% endif %}
+{% endif %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-icon' with icon: 'search', classes: 'cursor-pointer',
+    has_link: true, link_href: routes.search_url, link_label: aria_search, link_classes:
+    'header-mobile-search flex lg:hidden w-44 h-44 items-center lg:justify-center'
+    %}"
+  to: "{% render 'armament-icon' with icon, icon: 'search', classes: 'cursor-pointer',
+    has_link: true, link_href: routes.search_url, link_label: aria_search, link_classes:
+    'header-mobile-search flex lg:hidden w-44 h-44 items-center lg:justify-center'
+    %}"
+  position: 1129..1375
+- from: "{% render 'armament-icon' with icon: 'search', has_link: false %}"
+  to: "{% render 'armament-icon' with icon, icon: 'search', has_link: false %}"
+  position: 1857..1928
+- from: '{% render ''armament-localization-selector'' with show_country: section.settings.show_country,
+    show_languages: section.settings.show_languages, classes: ''font-heading'', country_attributes:
+    ''style="grid-area:cta;"'' %}'
+  to: '{% render ''armament-localization-selector'' with show_country, show_country:
+    section.settings.show_country, show_languages: section.settings.show_languages,
+    classes: ''font-heading'', country_attributes: ''style="grid-area:cta;"'' %}'
+  position: 2294..2522
+- from: "{% render 'armament-icon' with icon: 'search', has_link: false %}"
+  to: "{% render 'armament-icon' with icon, icon: 'search', has_link: false %}"
+  position: 2995..3066
+- from: "{% render 'armament-icon' with icon: 'search', has_link: false %}"
+  to: "{% render 'armament-icon' with icon, icon: 'search', has_link: false %}"
+  position: 3594..3665
+- from: "{% render 'armament-icon' with icon: 'account', classes: 'cursor-pointer',
+    has_link: true, link_href: routes.account_url, link_label: aria_account, link_classes:
+    account_classes %}"
+  to: "{% render 'armament-icon' with icon, icon: 'account', classes: 'cursor-pointer',
+    has_link: true, link_href: routes.account_url, link_label: aria_account, link_classes:
+    account_classes %}"
+  position: 5699..5885
+- from: "{% render 'armament-icon' with icon: 'bag', classes: 'cursor-pointer', has_link:
+    true, link_href: routes.cart_url, link_label: aria_cart, link_classes: bag_classes
+    %}"
+  to: "{% render 'armament-icon' with icon, icon: 'bag', classes: 'cursor-pointer',
+    has_link: true, link_href: routes.cart_url, link_label: aria_cart, link_classes:
+    bag_classes %}"
+  position: 5996..6168
+{%- endcomment -%}

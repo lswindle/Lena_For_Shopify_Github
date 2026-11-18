@@ -42,23 +42,23 @@
           {% if media.id %}media-id="{{ media.id }}"{% endif %}
         >
           <div class="w-full grid"> {% comment %} You need this wrapper div so that Safari doesn't stretch the images to their attribute height :facepalm: {% endcomment %}
-            {% render 'armament-product-media' with media: media, enable_zoom: zoom_enabled, enable_loop: loop_enabled, include_modal: false, title: slider_product.title, product_id: slider_product.id %}
+            {% render 'armament-product-media' with media, media: media, enable_zoom: zoom_enabled, enable_loop: loop_enabled, include_modal: false, title: slider_product.title, product_id: slider_product.id %}
           </div>
         </li>
       {% endfor %}
     </ul>
     {% if settings.custom_badges %}
       <div class="absolute top-0 left-0 z-50 pointer-events-none">
-        {% render 'engine-badges' with badges_product: slider_product %}
+        {% render 'engine-badges' with badges_product, badges_product: slider_product %}
       </div>
     {% endif %}
   </div>
 
   {% comment %} Slider-specific elements {% endcomment %}
   <template>
-    {% render 'armament-slider-arrows' with hide_on_mobile: true, left_position_classes: 'left-0', right_position_classes: 'right-0' %}
+    {% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true, left_position_classes: 'left-0', right_position_classes: 'right-0' %}
     <div data-name="mobile-indicator" class="block pt-3 lg:pt-4 bg-page">
-      {% render 'armament-scroll-bar' with item_count: slider_product.media.size, parent: 'slider-engine', target: 'slider', indicator: 'progress' %}
+      {% render 'armament-scroll-bar' with item_count, item_count: slider_product.media.size, parent: 'slider-engine', target: 'slider', indicator: 'progress' %}
     </div>
   </template>
 </slider-engine>
@@ -74,7 +74,40 @@
     data-modal-underlay-classes="bg-black opacity-60"
     class="invisible opacity-0"
   >
-    {% render 'armament-image' with image: media, classes: 'relative object-contain m-auto' %}
+    {% render 'armament-image' with image, image: media, classes: 'relative object-contain m-auto' %}
   </armada-modal>
 {% endfor %}
 <script src="{{ 'engine-modal.min.js' | asset_url }}" defer="defer" type="module"></script>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-product-media' with media: media, enable_zoom: zoom_enabled,
+    enable_loop: loop_enabled, include_modal: false, title: slider_product.title,
+    product_id: slider_product.id %}"
+  to: "{% render 'armament-product-media' with media, media: media, enable_zoom: zoom_enabled,
+    enable_loop: loop_enabled, include_modal: false, title: slider_product.title,
+    product_id: slider_product.id %}"
+  position: 1584..1782
+- from: "{% render 'engine-badges' with badges_product: slider_product %}"
+  to: "{% render 'engine-badges' with badges_product, badges_product: slider_product
+    %}"
+  position: 1954..2034
+- from: "{% render 'armament-slider-arrows' with hide_on_mobile: true, left_position_classes:
+    'left-0', right_position_classes: 'right-0' %}"
+  to: "{% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true,
+    left_position_classes: 'left-0', right_position_classes: 'right-0' %}"
+  position: 2149..2296
+- from: "{% render 'armament-scroll-bar' with item_count: slider_product.media.size,
+    parent: 'slider-engine', target: 'slider', indicator: 'progress' %}"
+  to: "{% render 'armament-scroll-bar' with item_count, item_count: slider_product.media.size,
+    parent: 'slider-engine', target: 'slider', indicator: 'progress' %}"
+  position: 2377..2532
+- from: "{% render 'armament-image' with image: media, classes: 'relative object-contain
+    m-auto' %}"
+  to: "{% render 'armament-image' with image, image: media, classes: 'relative object-contain
+    m-auto' %}"
+  position: 2994..3091
+{% endcomment %}

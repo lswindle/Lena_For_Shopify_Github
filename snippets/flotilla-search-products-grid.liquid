@@ -94,41 +94,22 @@
                   assign gallery_mode = ''
                 endif
               -%}
-              {% render 'ship-product-card' with
-              card_product: product,
-              block_order: block_order,
-              gallery: settings.collection_hover_effect,
-              gallery_mode: gallery_mode,
-              align: settings.product_info_position,
-              aspect_ratio: settings.product_cards_aspect_ratio,
-              quick_view_button_only: true,
-              block_attr_image: img_block_attr,
-              block_attr_title: title_block_attr,
-              block_attr_price: price_block_attr,
-              block_attr_swatch: swatch_block_attr,
-              block_attr_quick_add: quick_add_block_attr,
-              classes: 'w-full' %}
+              {% render 'ship-product-card' with card_product, card_product: product, block_order: block_order, gallery: settings.collection_hover_effect, gallery_mode: gallery_mode, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio, quick_view_button_only: true, block_attr_image: img_block_attr, block_attr_title: title_block_attr, block_attr_price: price_block_attr, block_attr_swatch: swatch_block_attr, block_attr_quick_add: quick_add_block_attr, classes: 'w-full' %}
             </div>
-            {% render 'ship-quick-view' with quick_view_product: product, modal_only: true %}
+            {% render 'ship-quick-view' with quick_view_product, quick_view_product: product, modal_only: true %}
           </div>
           {% endfor %}
         </div>
 
         {% if has_pagination and paginate.pages > 1 %}
-          {% render 'ship-pagination' with paginate: paginate %}
+          {% render 'ship-pagination' with paginate, paginate: paginate %}
         {% endif %}
       {% endpaginate %}
     {% else %}
       <div class="{{ grid_class }}" data-armada-selector="collection-card-grid">
         {% for product in search.results limit: products_per_page %}
         <div loadin-animation-elm loadin-animation-delay class="max-w-full block w-full">
-          {% render 'ship-product-card' with
-          card_product: product,
-          block_order: block_order,
-          gallery: settings.collection_hover_effect,
-          align: settings.product_info_position,
-          aspect_ratio: settings.product_cards_aspect_ratio,
-          classes: 'w-full' %}
+          {% render 'ship-product-card' with card_product, card_product: product, block_order: block_order, gallery: settings.collection_hover_effect, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio, classes: 'w-full' %}
         </div>
         {% endfor %}
       </div>
@@ -144,3 +125,52 @@
 
   {% endif %}
 </collection-grid>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'ship-product-card' with
+                  card_product: product,
+                  block_order: block_order,
+                  gallery: settings.collection_hover_effect,
+                  gallery_mode: gallery_mode,
+                  align: settings.product_info_position,
+                  aspect_ratio: settings.product_cards_aspect_ratio,
+                  quick_view_button_only: true,
+                  block_attr_image: img_block_attr,
+                  block_attr_title: title_block_attr,
+                  block_attr_price: price_block_attr,
+                  block_attr_swatch: swatch_block_attr,
+                  block_attr_quick_add: quick_add_block_attr,
+                  classes: 'w-full' %}
+  to: "{% render 'ship-product-card' with card_product, card_product: product, block_order:
+    block_order, gallery: settings.collection_hover_effect, gallery_mode: gallery_mode,
+    align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio,
+    quick_view_button_only: true, block_attr_image: img_block_attr, block_attr_title:
+    title_block_attr, block_attr_price: price_block_attr, block_attr_swatch: swatch_block_attr,
+    block_attr_quick_add: quick_add_block_attr, classes: 'w-full' %}"
+  position: 3575..4072
+- from: "{% render 'ship-quick-view' with quick_view_product: product, modal_only:
+    true %}"
+  to: "{% render 'ship-quick-view' with quick_view_product, quick_view_product: product,
+    modal_only: true %}"
+  position: 4104..4205
+- from: "{% render 'ship-pagination' with paginate: paginate %}"
+  to: "{% render 'ship-pagination' with paginate, paginate: paginate %}"
+  position: 4327..4391
+- from: |-
+    {% render 'ship-product-card' with
+              card_product: product,
+              block_order: block_order,
+              gallery: settings.collection_hover_effect,
+              align: settings.product_info_position,
+              aspect_ratio: settings.product_cards_aspect_ratio,
+              classes: 'w-full' %}
+  to: "{% render 'ship-product-card' with card_product, card_product: product, block_order:
+    block_order, gallery: settings.collection_hover_effect, align: settings.product_info_position,
+    aspect_ratio: settings.product_cards_aspect_ratio, classes: 'w-full' %}"
+  position: 4701..4952
+{% endcomment %}

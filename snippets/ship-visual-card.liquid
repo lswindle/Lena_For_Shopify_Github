@@ -81,9 +81,9 @@
     
     <div class="{{ grid_cells }}">
       {% if card_image != blank %}
-        {% render 'armament-image' with image: card_image, classes: 'w-full h-full object-cover' %}
+        {% render 'armament-image' with image, image: card_image, classes: 'w-full h-full object-cover' %}
       {% else %}
-        {% render 'armament-placeholder' with name: placeholder %}
+        {% render 'armament-placeholder' with name, name: placeholder %}
       {% endif %}
     </div>
  
@@ -96,7 +96,7 @@
             {% if truncate_heading %}
               {% assign card_text = card_text | truncatewords: truncate_heading, '...' %}
             {% endif %}
-            {% render 'armament-heading' with tag: 'h4', heading_content: card_text, heading_type: 'heading-4', data_aid: 'visual-card-heading' %}
+            {% render 'armament-heading' with tag, tag: 'h4', heading_content: card_text, heading_type: 'heading-4', data_aid: 'visual-card-heading' %}
           </div>
         {% endif %}
 
@@ -107,7 +107,7 @@
           {% endif %}
           {% assign button_aria_label = card_text | append: ' - ' | append: button_label %}
           {% assign button_attributes = 'aria-label="' | append: button_aria_label | append: '"' %}
-          {% render 'armament-button' with url: url, content: button_label, style: button_style, classes: button_classes, attributes: button_attributes, data_aid: 'button-link' %}
+          {% render 'armament-button' with url, url: url, content: button_label, style: button_style, classes: button_classes, attributes: button_attributes, data_aid: 'button-link' %}
         {% endif %}
       </div>
     </div>
@@ -119,3 +119,30 @@
 {% endif %}
 </div>
 
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-image' with image: card_image, classes: 'w-full h-full
+    object-cover' %}"
+  to: "{% render 'armament-image' with image, image: card_image, classes: 'w-full
+    h-full object-cover' %}"
+  position: 3048..3146
+- from: "{% render 'armament-placeholder' with name: placeholder %}"
+  to: "{% render 'armament-placeholder' with name, name: placeholder %}"
+  position: 3172..3236
+- from: "{% render 'armament-heading' with tag: 'h4', heading_content: card_text,
+    heading_type: 'heading-4', data_aid: 'visual-card-heading' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h4', heading_content: card_text,
+    heading_type: 'heading-4', data_aid: 'visual-card-heading' %}"
+  position: 3949..4088
+- from: "{% render 'armament-button' with url: url, content: button_label, style:
+    button_style, classes: button_classes, attributes: button_attributes, data_aid:
+    'button-link' %}"
+  to: "{% render 'armament-button' with url, url: url, content: button_label, style:
+    button_style, classes: button_classes, attributes: button_attributes, data_aid:
+    'button-link' %}"
+  position: 4588..4762
+{% endcomment %}

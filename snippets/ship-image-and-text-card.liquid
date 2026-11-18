@@ -57,7 +57,7 @@
     {% endif %}
 
     <div class="relative {{ aspect_ratio_class }}">
-      {% render 'armament-image' with image: image, classes: 'absolute w-full h-full object-cover' %}
+      {% render 'armament-image' with image, image: image, classes: 'absolute w-full h-full object-cover' %}
     </div>
 
     {% if url %}
@@ -65,7 +65,7 @@
     {% endif %}
   {% elsif placeholder_image %}
     <div class="relative {{ aspect_ratio_class }}">
-      {% render 'armament-placeholder' with name: 'image', classes: 'absolute w-full h-full object-cover' %}
+      {% render 'armament-placeholder' with name, name: 'image', classes: 'absolute w-full h-full object-cover' %}
     </div>
   {% else %}
     {% assign text_container_classes = 'flex flex-col justify-center' %}
@@ -73,15 +73,15 @@
   <div class="text-body p-4 md:p-5 flex-grow {{ text_container_classes }} {{ text_align_class }}{% if border %} border-t{% endif %}">
     <div class="text-h6 font-heading heading-case leading-none mb-1">
       {% if author and show_author %}
-        {% render 'armament-author' with author: author, classes: 'inline' %}{% if date and show_date %} -{% endif %}
+        {% render 'armament-author' with author, author: author, classes: 'inline' %}{% if date and show_date %} -{% endif %}
       {% endif %}
       {% if date and show_date %}
-        {% render 'armament-date' with date: date, classes: 'inline' %}
+        {% render 'armament-date' with date, date: date, classes: 'inline' %}
       {% endif %}
     </div>
 
     {% if heading %}
-      {% render 'armament-heading' with tag: 'h3', heading_type: 'heading-4', classes: 'mb-2', heading_content: heading, data_aid: 'image-text-card-heading' %}
+      {% render 'armament-heading' with tag, tag: 'h3', heading_type: 'heading-4', classes: 'mb-2', heading_content: heading, data_aid: 'image-text-card-heading' %}
     {% endif %}
 
     {% if text %}
@@ -92,13 +92,53 @@
       <div class="text-h6 font-heading heading-case">
         <a href="{{ url }}" class="flex items-center group {{ flex_class }}" aria-label="{{ 'blogs.article.read_more_title' | t: title: heading | escape }}">
           <span>{{ 'blogs.article.read_more' | t }}</span>
-          {% render 'armament-icon' with icon: 'arrow-right', width: 16, height: 16, classes: 'pl-2' %}
+          {% render 'armament-icon' with icon, icon: 'arrow-right', width: 16, height: 16, classes: 'pl-2' %}
         </a>
       </div>
     {% elsif button_label != blank and url %}
       <div>
-        {% render 'armament-button' with url: url, content: button_label, style: button_style %}
+        {% render 'armament-button' with url, url: url, content: button_label, style: button_style %}
       </div>
     {% endif %}
   </div>
 </article>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-image' with image: image, classes: 'absolute w-full h-full
+    object-cover' %}"
+  to: "{% render 'armament-image' with image, image: image, classes: 'absolute w-full
+    h-full object-cover' %}"
+  position: 2498..2600
+- from: "{% render 'armament-placeholder' with name: 'image', classes: 'absolute w-full
+    h-full object-cover' %}"
+  to: "{% render 'armament-placeholder' with name, name: 'image', classes: 'absolute
+    w-full h-full object-cover' %}"
+  position: 2747..2855
+- from: "{% render 'armament-author' with author: author, classes: 'inline' %}"
+  to: "{% render 'armament-author' with author, author: author, classes: 'inline'
+    %}"
+  position: 3217..3294
+- from: "{% render 'armament-date' with date: date, classes: 'inline' %}"
+  to: "{% render 'armament-date' with date, date: date, classes: 'inline' %}"
+  position: 3395..3464
+- from: "{% render 'armament-heading' with tag: 'h3', heading_type: 'heading-4', classes:
+    'mb-2', heading_content: heading, data_aid: 'image-text-card-heading' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h3', heading_type: 'heading-4',
+    classes: 'mb-2', heading_content: heading, data_aid: 'image-text-card-heading'
+    %}"
+  position: 3522..3680
+- from: "{% render 'armament-icon' with icon: 'arrow-right', width: 16, height: 16,
+    classes: 'pl-2' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-right', width: 16, height:
+    16, classes: 'pl-2' %}"
+  position: 4239..4338
+- from: "{% render 'armament-button' with url: url, content: button_label, style:
+    button_style %}"
+  to: "{% render 'armament-button' with url, url: url, content: button_label, style:
+    button_style %}"
+  position: 4431..4524
+{% endcomment %}

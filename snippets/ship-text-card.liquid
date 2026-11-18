@@ -14,7 +14,7 @@
 
 <article class="text-body bg-page p-4 md:p-5{% if classes %} {{ classes }}{% endif %}" data-aid="text-card">
   {% if heading %}
-    {% render 'armament-heading' with tag: 'h3', heading_type: 'heading-4', classes: 'mb-2 break-words', heading_content: heading, data_aid: 'text-card-heading' %}
+    {% render 'armament-heading' with tag, tag: 'h3', heading_type: 'heading-4', classes: 'mb-2 break-words', heading_content: heading, data_aid: 'text-card-heading' %}
   {% endif %}
 
   {% if text %}
@@ -25,6 +25,24 @@
     {% if text == blank %}
       {% assign button_classes = 'mt-2 md:mt-3' %}
     {% endif %}
-    {% render 'armament-button' with url: button_link, content: button_label, classes: button_classes, style: button_style, data_aid: 'text-card-button' %}
+    {% render 'armament-button' with url, url: button_link, content: button_label, classes: button_classes, style: button_style, data_aid: 'text-card-button' %}
   {% endif %}
 </article>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-heading' with tag: 'h3', heading_type: 'heading-4', classes:
+    'mb-2 break-words', heading_content: heading, data_aid: 'text-card-heading' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h3', heading_type: 'heading-4',
+    classes: 'mb-2 break-words', heading_content: heading, data_aid: 'text-card-heading'
+    %}"
+  position: 742..906
+- from: "{% render 'armament-button' with url: button_link, content: button_label,
+    classes: button_classes, style: button_style, data_aid: 'text-card-button' %}"
+  to: "{% render 'armament-button' with url, url: button_link, content: button_label,
+    classes: button_classes, style: button_style, data_aid: 'text-card-button' %}"
+  position: 1161..1317
+{% endcomment %}

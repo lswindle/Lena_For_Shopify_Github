@@ -30,8 +30,21 @@
     {% if paginate.next.url %}
     {% assign count = product_count | plus: paginate.current_offset %}
       <span class="block mb-3">{{ 'templates.collection.load_more_info' | t: currentCount: count, totalCount: paginate.items }}</span>
-      {% render 'armament-button' with content: button_text, attributes: btn_attrs, classes: 'max-w-[200px] flex items-center justify-center', loading: true, icon_position_class: 'top-auto left-auto' %}
+      {% render 'armament-button' with content, content: button_text, attributes: btn_attrs, classes: 'max-w-[200px] flex items-center justify-center', loading: true, icon_position_class: 'top-auto left-auto' %}
     {% endif %}
   </load-more-pagination>
 
-{% endif %}
+{% endif %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-button' with content: button_text, attributes: btn_attrs,
+    classes: 'max-w-[200px] flex items-center justify-center', loading: true, icon_position_class:
+    'top-auto left-auto' %}"
+  to: "{% render 'armament-button' with content, content: button_text, attributes:
+    btn_attrs, classes: 'max-w-[200px] flex items-center justify-center', loading:
+    true, icon_position_class: 'top-auto left-auto' %}"
+  position: 1290..1495
+{%- endcomment -%}

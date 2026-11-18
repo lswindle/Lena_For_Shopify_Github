@@ -29,9 +29,30 @@
   data-section-id="{{ section.id }}"
   hidden
 >
-  {% render 'ship-product-form' with form_product: sticky_product, is_sticky: true, dynamic_buttons: false, block_order: 'title,price,payment-buttons', classes: 'flex flex-col lg:grid lg:grid-cols-[repeat(2,minmax(0,auto)),repeat(2,1fr)] gap-[10px] lg:gap-30 items-center justify-start', button_wrapper_classes: button_wrapper_classes, title_classes: 'hidden lg:flex order-1 max-w-max', price_classes: 'hidden lg:block order-2 pb-0 text-h5 font-heading heading-case', title_heading_type: 'heading-4', basic_form_classes: basic_form_classes, price_only: true, title_only: true %}
+  {% render 'ship-product-form' with form_product, form_product: sticky_product, is_sticky: true, dynamic_buttons: false, block_order: 'title,price,payment-buttons', classes: 'flex flex-col lg:grid lg:grid-cols-[repeat(2,minmax(0,auto)),repeat(2,1fr)] gap-[10px] lg:gap-30 items-center justify-start', button_wrapper_classes: button_wrapper_classes, title_classes: 'hidden lg:flex order-1 max-w-max', price_classes: 'hidden lg:block order-2 pb-0 text-h5 font-heading heading-case', title_heading_type: 'heading-4', basic_form_classes: basic_form_classes, price_only: true, title_only: true %}
 </product-form-sticky>
 
 <safe-load-scripts>
   <script src="{{ 'component-product-form-sticky.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="product-form-sticky"></script>
-</safe-load-scripts>
+</safe-load-scripts>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'ship-product-form' with form_product: sticky_product, is_sticky:
+    true, dynamic_buttons: false, block_order: 'title,price,payment-buttons', classes:
+    'flex flex-col lg:grid lg:grid-cols-[repeat(2,minmax(0,auto)),repeat(2,1fr)] gap-[10px]
+    lg:gap-30 items-center justify-start', button_wrapper_classes: button_wrapper_classes,
+    title_classes: 'hidden lg:flex order-1 max-w-max', price_classes: 'hidden lg:block
+    order-2 pb-0 text-h5 font-heading heading-case', title_heading_type: 'heading-4',
+    basic_form_classes: basic_form_classes, price_only: true, title_only: true %}"
+  to: "{% render 'ship-product-form' with form_product, form_product: sticky_product,
+    is_sticky: true, dynamic_buttons: false, block_order: 'title,price,payment-buttons',
+    classes: 'flex flex-col lg:grid lg:grid-cols-[repeat(2,minmax(0,auto)),repeat(2,1fr)]
+    gap-[10px] lg:gap-30 items-center justify-start', button_wrapper_classes: button_wrapper_classes,
+    title_classes: 'hidden lg:flex order-1 max-w-max', price_classes: 'hidden lg:block
+    order-2 pb-0 text-h5 font-heading heading-case', title_heading_type: 'heading-4',
+    basic_form_classes: basic_form_classes, price_only: true, title_only: true %}"
+  position: 1042..1632
+{%- endcomment -%}

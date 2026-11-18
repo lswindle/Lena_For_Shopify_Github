@@ -79,7 +79,7 @@
 
 {% capture badges %}
 <div class="absolute top-0 left-0 z-50 pointer-events-none">
-  {% render 'engine-badges' with badges_product: card_product %}
+  {% render 'engine-badges' with badges_product, badges_product: card_product %}
 </div>
 {% endcapture %}
 
@@ -101,21 +101,21 @@
         {% if card_product.featured_media %}
           <a href="{{ card_product.url }}" title="{{ card_product.title | escape }}" class="block">
             <div class="{% if aspect_ratio %}aspect-{{ aspect_ratio }}{% endif %} relative group">
-              {% render 'armament-image' with image: card_product.featured_media.preview_image, classes: imgclasses, sizes: '33vw' %}
+              {% render 'armament-image' with image, image: card_product.featured_media.preview_image, classes: imgclasses, sizes: '33vw' %}
               {% if gallery == 'show_second_image' and card_product.media.size > 1 %}
-                {% render 'armament-image' with image: card_product.media[1].preview_image, classes: second_img_classes, , sizes: '33vw' %}
+                {% render 'armament-image' with image, image: card_product.media[1].preview_image, classes: second_img_classes, sizes: '33vw' %}
               {% endif %}
             </div>
           </a>
         {% else %}
           <a href="{{ card_product.url }}" title="{{ card_product.title | escape }}" class="block">
             <div class="{% if aspect_ratio %}aspect-{{ aspect_ratio }}{% endif %} relative group flex items-center justify-center bg-body-opacity-10">
-              {% render 'armament-heading' with heading_type: 'heading-5', heading_content: card_product.title, data_aid: 'product-heading-no-image', classes: headingClasses %}
+              {% render 'armament-heading' with heading_type, heading_type: 'heading-5', heading_content: card_product.title, data_aid: 'product-heading-no-image', classes: headingClasses %}
             </div>
           </a>
         {% endif %}
         {% if settings.enable_quick_view and disable_quick_view != true %}
-          {% render 'ship-quick-view' with quick_view_product: card_product, button_only: quick_view_button_only, classes: 'bottom-2' %}
+          {% render 'ship-quick-view' with quick_view_product, quick_view_product: card_product, button_only: quick_view_button_only, classes: 'bottom-2' %}
         {% endif %}
       </div>
     {% endif %}
@@ -126,7 +126,7 @@
         {{ block_attr_title }}
       >
         <a href="{{ card_product.url }}" title="{{ card_product.title | escape }}">
-          {% render 'armament-heading' with tag: 'h5', heading_content: card_product.title, data_aid: 'product-card-product-heading' %}
+          {% render 'armament-heading' with tag, tag: 'h5', heading_content: card_product.title, data_aid: 'product-card-product-heading' %}
         </a>
       </div>
     {% endif %}
@@ -148,7 +148,7 @@
         {%- if settings.product_card_badges -%}
           {{ badges }}
         {%- endif -%}
-        {% render 'armament-product-thumbnail-slider' with product_id: card_product.id, media: card_product.media, aspect_ratio: aspect_ratio, position: position, arrows: true, mode: gallery_mode, url: card_product.url %}
+        {% render 'armament-product-thumbnail-slider' with product_id, product_id: card_product.id, media: card_product.media, aspect_ratio: aspect_ratio, position: position, arrows: true, mode: gallery_mode, url: card_product.url %}
         {% if settings.enable_quick_view and disable_quick_view != true %}
           {%- liquid
             if card_product.media.size > 1
@@ -157,7 +157,7 @@
               assign quick_view_classes = 'bottom-0'
             endif
           -%}
-          {% render 'ship-quick-view' with quick_view_product: card_product, button_only: quick_view_button_only, classes: quick_view_classes %}
+          {% render 'ship-quick-view' with quick_view_product, quick_view_product: card_product, button_only: quick_view_button_only, classes: quick_view_classes %}
         {% endif %}
       </div>
     {% endif %}
@@ -174,7 +174,7 @@
             assign disable_swatches = true
           endif
         -%}
-        {% render 'armament-color-swatch' with swatch_product: card_product, identifiers: 'color,colour,couleur,colore,farbe,색,色,färg,farve', change_on_hover: change_on_hover, disabled: disable_swatches %}
+        {% render 'armament-color-swatch' with swatch_product, swatch_product: card_product, identifiers: 'color,colour,couleur,colore,farbe,색,色,färg,farve', change_on_hover: change_on_hover, disabled: disable_swatches %}
       </div>
     {% endif %}
     {% if block_name == 'quick-add' %}
@@ -183,7 +183,7 @@
         class="text-{{ align }} px-2 md:px-3"
         {{ block_attr_quick_add }}
       >
-        {% render 'ship-quick-add' with quick_product: card_product %}
+        {% render 'ship-quick-add' with quick_product, quick_product: card_product %}
       </div>
     {% endif %}
   {% endfor %}
@@ -191,4 +191,64 @@
 
 <safe-load-scripts class="hidden">
   <script src="{{ 'component-product-card.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="product-card"></script>
-</safe-load-scripts>
+</safe-load-scripts>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'engine-badges' with badges_product: card_product %}"
+  to: "{% render 'engine-badges' with badges_product, badges_product: card_product
+    %}"
+  position: 3190..3268
+- from: "{% render 'armament-image' with image: card_product.featured_media.preview_image,
+    classes: imgclasses, sizes: '33vw' %}"
+  to: "{% render 'armament-image' with image, image: card_product.featured_media.preview_image,
+    classes: imgclasses, sizes: '33vw' %}"
+  position: 3991..4117
+- from: "{% render 'armament-image' with image: card_product.media[1].preview_image,
+    classes: second_img_classes, , sizes: '33vw' %}"
+  to: "{% render 'armament-image' with image, image: card_product.media[1].preview_image,
+    classes: second_img_classes, sizes: '33vw' %}"
+  position: 4220..4348
+- from: "{% render 'armament-heading' with heading_type: 'heading-5', heading_content:
+    card_product.title, data_aid: 'product-heading-no-image', classes: headingClasses
+    %}"
+  to: "{% render 'armament-heading' with heading_type, heading_type: 'heading-5',
+    heading_content: card_product.title, data_aid: 'product-heading-no-image', classes:
+    headingClasses %}"
+  position: 4693..4869
+- from: "{% render 'ship-quick-view' with quick_view_product: card_product, button_only:
+    quick_view_button_only, classes: 'bottom-2' %}"
+  to: "{% render 'ship-quick-view' with quick_view_product, quick_view_product: card_product,
+    button_only: quick_view_button_only, classes: 'bottom-2' %}"
+  position: 5009..5155
+- from: "{% render 'armament-heading' with tag: 'h5', heading_content: card_product.title,
+    data_aid: 'product-card-product-heading' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h5', heading_content: card_product.title,
+    data_aid: 'product-card-product-heading' %}"
+  position: 5466..5596
+- from: "{% render 'armament-product-thumbnail-slider' with product_id: card_product.id,
+    media: card_product.media, aspect_ratio: aspect_ratio, position: position, arrows:
+    true, mode: gallery_mode, url: card_product.url %}"
+  to: "{% render 'armament-product-thumbnail-slider' with product_id, product_id:
+    card_product.id, media: card_product.media, aspect_ratio: aspect_ratio, position:
+    position, arrows: true, mode: gallery_mode, url: card_product.url %}"
+  position: 6209..6434
+- from: "{% render 'ship-quick-view' with quick_view_product: card_product, button_only:
+    quick_view_button_only, classes: quick_view_classes %}"
+  to: "{% render 'ship-quick-view' with quick_view_product, quick_view_product: card_product,
+    button_only: quick_view_button_only, classes: quick_view_classes %}"
+  position: 6756..6910
+- from: "{% render 'armament-color-swatch' with swatch_product: card_product, identifiers:
+    'color,colour,couleur,colore,farbe,색,色,färg,farve', change_on_hover: change_on_hover,
+    disabled: disable_swatches %}"
+  to: "{% render 'armament-color-swatch' with swatch_product, swatch_product: card_product,
+    identifiers: 'color,colour,couleur,colore,farbe,색,色,färg,farve', change_on_hover:
+    change_on_hover, disabled: disable_swatches %}"
+  position: 7338..7551
+- from: "{% render 'ship-quick-add' with quick_product: card_product %}"
+  to: "{% render 'ship-quick-add' with quick_product, quick_product: card_product
+    %}"
+  position: 7758..7835
+{%- endcomment -%}
