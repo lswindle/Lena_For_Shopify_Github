@@ -15,7 +15,7 @@
   <div data-armada-selector="cart-main-inner" class="h-full">
     {% if cart.items.size > 0 and section.settings.sticky_summary %}
       <div class="hidden md:px-6 bg-page text-body" data-cart-summary-placeholder id="sticky-summary-placeholder" data-color-scheme={{ section.settings.summary_color_scheme }} data-aid="cart-summary-top">
-        {% render 'ship-cart-summary-static-top' with show_divider: show_divider %}
+        {% render 'ship-cart-summary-static-top' with show_divider, show_divider: show_divider %}
       </div>
     {% endif %}
 
@@ -27,18 +27,18 @@
         <div class="max-w-[1280px] mx-auto{% if cart.items.size < 1 %} flex flex-col place-items-center{% endif %}">
           {% if cart.items.size < 1 %}
             {% assign htext = 'sections.cart.empty' | t %}
-            {% render 'armament-heading' with tag: 'h1', heading_content: htext, heading_type: 'heading-3', classes: 'mb-4 md:mb-5', data_aid: 'cart-main-heading' %}
+            {% render 'armament-heading' with tag, tag: 'h1', heading_content: htext, heading_type: 'heading-3', classes: 'mb-4 md:mb-5', data_aid: 'cart-main-heading' %}
             {% assign continue_shopping_string = 'sections.cart.continue_shopping' | t %}
-            {% render 'armament-button' with url: routes.collections_url, content: continue_shopping_string %}
+            {% render 'armament-button' with url, url: routes.collections_url, content: continue_shopping_string %}
           {% else %}
             {% assign heading_text = 'general.cart.your_cart' | t %}
-            {% render 'armament-heading' with tag: 'h1', heading_content: heading_text, heading_type: 'heading-3', classes: 'mb-4 md:mb-5', data_aid: 'cart-main-heading' %}
+            {% render 'armament-heading' with tag, tag: 'h1', heading_content: heading_text, heading_type: 'heading-3', classes: 'mb-4 md:mb-5', data_aid: 'cart-main-heading' %}
           {% endif %}
           <cart-line-items data-section-id="{{ section.id }}">
             <form action="{{ routes.cart_url }}" method="post" id="cart" data-armada-selector="cart-line-items-wrapper">
               <ul>
                 {% for item in cart.items %}
-                  {% render 'ship-cart-line-item' with item: item, data_line_index: forloop.index %}
+                  {% render 'ship-cart-line-item' with item, item: item, data_line_index: forloop.index %}
                 {% endfor %}
               </ul>
             </form>
@@ -49,12 +49,7 @@
     {% if cart.items.size > 0 %}
       <div data-cart-summary-wrapper data-color-scheme="{{ section.settings.summary_color_scheme }}" class="w-full bg-page">
         <div class="max-w-[1280px] mx-auto">
-          {% render 'ship-cart-summary' with
-          show_tax_shipping: section.settings.show_tax_shipping,
-          show_note: section.settings.enable_notes,
-          show_sticky_summary: section.settings.sticky_summary,
-          show_divider: show_divider
-           %}
+          {% render 'ship-cart-summary' with show_tax_shipping, show_tax_shipping: section.settings.show_tax_shipping, show_note: section.settings.enable_notes, show_sticky_summary: section.settings.sticky_summary, show_divider: show_divider %}
         </div>
       </div>
     {% endif %}
@@ -116,3 +111,48 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'ship-cart-summary-static-top' with show_divider: show_divider
+    %}"
+  to: "{% render 'ship-cart-summary-static-top' with show_divider, show_divider: show_divider
+    %}"
+  position: 675..764
+- from: "{% render 'armament-heading' with tag: 'h1', heading_content: htext, heading_type:
+    'heading-3', classes: 'mb-4 md:mb-5', data_aid: 'cart-main-heading' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h1', heading_content: htext, heading_type:
+    'heading-3', classes: 'mb-4 md:mb-5', data_aid: 'cart-main-heading' %}"
+  position: 1294..1452
+- from: "{% render 'armament-button' with url: routes.collections_url, content: continue_shopping_string
+    %}"
+  to: "{% render 'armament-button' with url, url: routes.collections_url, content:
+    continue_shopping_string %}"
+  position: 1555..1658
+- from: "{% render 'armament-heading' with tag: 'h1', heading_content: heading_text,
+    heading_type: 'heading-3', classes: 'mb-4 md:mb-5', data_aid: 'cart-main-heading'
+    %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h1', heading_content: heading_text,
+    heading_type: 'heading-3', classes: 'mb-4 md:mb-5', data_aid: 'cart-main-heading'
+    %}"
+  position: 1761..1926
+- from: "{% render 'ship-cart-line-item' with item: item, data_line_index: forloop.index
+    %}"
+  to: "{% render 'ship-cart-line-item' with item, item: item, data_line_index: forloop.index
+    %}"
+  position: 2215..2303
+- from: |-
+    {% render 'ship-cart-summary' with
+              show_tax_shipping: section.settings.show_tax_shipping,
+              show_note: section.settings.enable_notes,
+              show_sticky_summary: section.settings.sticky_summary,
+              show_divider: show_divider
+               %}
+  to: "{% render 'ship-cart-summary' with show_tax_shipping, show_tax_shipping: section.settings.show_tax_shipping,
+    show_note: section.settings.enable_notes, show_sticky_summary: section.settings.sticky_summary,
+    show_divider: show_divider %}"
+  position: 2658..2892
+{% endcomment %}

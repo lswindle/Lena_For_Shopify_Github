@@ -48,13 +48,13 @@
       </ul>
       <template>
         <button type="button" data-icon-type="prev" data-name="icon-prev" class="absolute cursor-pointer bg-page px-3 py-2 left-0 -translate-x-full z-40 transition-opacity duration-500 before:block before:absolute before:h-44 before:w-44 before:bottom-[-25%] before:left-0 group{% unless section.settings.show_arrows %} hidden{% endunless %}" aria-label="Go to previous slide" {{ btn_top_val }}>
-          {% render 'armament-icon' with icon: 'arrow-left', width: icon_size, height: icon_size %}
+          {% render 'armament-icon' with icon, icon: 'arrow-left', width: icon_size, height: icon_size %}
         </button>
         <button type="button" data-icon-type="next" data-name="icon-next" class="absolute cursor-pointer bg-page px-3 py-2 right-0 translate-x-full z-40 transition-opacity duration-500 before:block before:absolute before:h-44 before:w-44 before:bottom-[-25%] before:left-0 group{% unless section.settings.show_arrows %} hidden{% endunless %}" aria-label="Go to next slide" {{ btn_top_val }}>
-          {% render 'armament-icon' with icon: 'arrow-right', width: icon_size, height: icon_size %}
+          {% render 'armament-icon' with icon, icon: 'arrow-right', width: icon_size, height: icon_size %}
         </button>
         <div data-name="mobile-indicator">
-          {% render 'armament-scroll-bar' with classes: 'pb-4', item_count: 3, parent: 'fade-slider-wrap', target: 'fade-slider', indicator: 'progress' %}
+          {% render 'armament-scroll-bar' with classes, classes: 'pb-4', item_count: 3, parent: 'fade-slider-wrap', target: 'fade-slider', indicator: 'progress' %}
         </div>
       </template>
     </fade-slider>
@@ -154,4 +154,25 @@
     ]
   }
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-icon' with icon: 'arrow-left', width: icon_size, height:
+    icon_size %}"
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-left', width: icon_size,
+    height: icon_size %}"
+  position: 2415..2510
+- from: "{% render 'armament-icon' with icon: 'arrow-right', width: icon_size, height:
+    icon_size %}"
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-right', width: icon_size,
+    height: icon_size %}"
+  position: 2931..3027
+- from: "{% render 'armament-scroll-bar' with classes: 'pb-4', item_count: 3, parent:
+    'fade-slider-wrap', target: 'fade-slider', indicator: 'progress' %}"
+  to: "{% render 'armament-scroll-bar' with classes, classes: 'pb-4', item_count:
+    3, parent: 'fade-slider-wrap', target: 'fade-slider', indicator: 'progress' %}"
+  position: 3099..3252
+{%- endcomment -%}

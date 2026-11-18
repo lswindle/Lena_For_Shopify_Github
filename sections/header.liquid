@@ -16,8 +16,8 @@
   <header role="banner" data-section-id="{{ section.id }}" data-aid="header-section" {{ header_grid }} class="grid py-3 px-4 lg:px-5 xl:px-6 lg:py-0 md:gap-[1rem] items-center bg-page text-body relative border-b border-b-border-opacity-10" data-color-scheme="{{ section.settings.section_color_scheme }}">
 
     <button type="button" data-armada-selector="navigation-toggle" class="lg:hidden w-44 h-44 navigation-toggle group" aria-label="Open navigation" aria-expanded="false" aria-controls="main-navigation">
-      {% render 'armament-icon' with icon: 'mobile-nav', attributes: 'data-aid="hamburger-menu" style="grid-area:nav;" data-armada-selector="mobile-menu-open-icon"' %}
-      {% render 'armament-icon' with icon: 'cancel', classes: 'hidden', attributes: 'data-aid="hamburger-menu" style="grid-area:nav;" data-armada-selector="mobile-menu-close-icon"' %}
+      {% render 'armament-icon' with icon, icon: 'mobile-nav', attributes: 'data-aid="hamburger-menu" style="grid-area:nav;" data-armada-selector="mobile-menu-open-icon"' %}
+      {% render 'armament-icon' with icon, icon: 'cancel', classes: 'hidden', attributes: 'data-aid="hamburger-menu" style="grid-area:nav;" data-armada-selector="mobile-menu-close-icon"' %}
     </button>
     {% liquid
       unless template == 'index'
@@ -25,8 +25,8 @@
       else 
         assign text_logo_tag = 'h1'
       endunless
-      render 'ship-main-navigation' with section_blocks: section.blocks, icon: section.settings.menu_icon
-      render 'armament-logo' with logo_image: section.settings.header_logo, width_desktop: section.settings.logo_width_desktop, width_mobile: section.settings.logo_width_mobile, tag: text_logo_tag, text_classes: 'text-h5', image_classes: 'logo min-w-[50px] max-w-[160px] lg:min-w-[80px] lg:max-w-[270px]', section_id: section.id, link_classes: logo_align, attributes: 'style="grid-area:logo;"'
+      render 'ship-main-navigation' with section_blocks, section_blocks: section.blocks, icon: section.settings.menu_icon
+      render 'armament-logo' with logo_image, logo_image: section.settings.header_logo, width_desktop: section.settings.logo_width_desktop, width_mobile: section.settings.logo_width_mobile, tag: text_logo_tag, text_classes: 'text-h5', image_classes: 'logo min-w-[50px] max-w-[160px] lg:min-w-[80px] lg:max-w-[270px]', section_id: section.id, link_classes: logo_align, attributes: 'style="grid-area:logo;"'
       render 'ship-header-cta'
     %}
 
@@ -500,4 +500,38 @@
     ]
   }
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% render ''armament-icon'' with icon: ''mobile-nav'', attributes: ''data-aid="hamburger-menu"
+    style="grid-area:nav;" data-armada-selector="mobile-menu-open-icon"'' %}'
+  to: '{% render ''armament-icon'' with icon, icon: ''mobile-nav'', attributes: ''data-aid="hamburger-menu"
+    style="grid-area:nav;" data-armada-selector="mobile-menu-open-icon"'' %}'
+  position: 1355..1522
+- from: '{% render ''armament-icon'' with icon: ''cancel'', classes: ''hidden'', attributes:
+    ''data-aid="hamburger-menu" style="grid-area:nav;" data-armada-selector="mobile-menu-close-icon"''
+    %}'
+  to: '{% render ''armament-icon'' with icon, icon: ''cancel'', classes: ''hidden'',
+    attributes: ''data-aid="hamburger-menu" style="grid-area:nav;" data-armada-selector="mobile-menu-close-icon"''
+    %}'
+  position: 1529..1712
+- from: "      render 'ship-main-navigation' with section_blocks: section.blocks,
+    icon: section.settings.menu_icon"
+  to: "      render 'ship-main-navigation' with section_blocks, section_blocks: section.blocks,
+    icon: section.settings.menu_icon"
+  position: 1874..1995
+- from: '      render ''armament-logo'' with logo_image: section.settings.header_logo,
+    width_desktop: section.settings.logo_width_desktop, width_mobile: section.settings.logo_width_mobile,
+    tag: text_logo_tag, text_classes: ''text-h5'', image_classes: ''logo min-w-[50px]
+    max-w-[160px] lg:min-w-[80px] lg:max-w-[270px]'', section_id: section.id, link_classes:
+    logo_align, attributes: ''style="grid-area:logo;"'''
+  to: '      render ''armament-logo'' with logo_image, logo_image: section.settings.header_logo,
+    width_desktop: section.settings.logo_width_desktop, width_mobile: section.settings.logo_width_mobile,
+    tag: text_logo_tag, text_classes: ''text-h5'', image_classes: ''logo min-w-[50px]
+    max-w-[160px] lg:min-w-[80px] lg:max-w-[270px]'', section_id: section.id, link_classes:
+    logo_align, attributes: ''style="grid-area:logo;"'''
+  position: 1996..2401
+{%- endcomment -%}

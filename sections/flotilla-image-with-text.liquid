@@ -14,10 +14,10 @@
         <div class="{% if section.settings.image == blank %}bg-white{% endif %} w-full md:w-1/2 overflow-hidden text-body{% if border %} border{% endif %}" data-aid="image-with-text--image-wrapper">
           {% if section.settings.image != blank %}
             <div class="h-full">
-              {% render 'armament-image' with image: section.settings.image, classes: "w-full h-full object-cover", zoomout_animation: true %}
+              {% render 'armament-image' with image, image: section.settings.image, classes: "w-full h-full object-cover", zoomout_animation: true %}
             </div>
           {% else %}
-            {% render 'armament-placeholder' with name: 'collection-2', classes: "!border-0" %}
+            {% render 'armament-placeholder' with name, name: 'collection-2', classes: "!border-0" %}
           {% endif %}
         </div>
 
@@ -68,7 +68,7 @@
                                   assign subheading_classes = 'pb-2 break-words'
                                 endif
 
-                                render 'armament-heading' with tag: 'h4', heading_content: block.settings.subheading, heading_type: 'heading-4', classes: subheading_classes, data_aid: 'image-with-text--subheading'
+                                render 'armament-heading' with tag, tag: 'h4', heading_content: block.settings.subheading, heading_type: 'heading-4', classes: subheading_classes, data_aid: 'image-with-text--subheading'
                               endif
 
                               if block.settings.heading != blank
@@ -78,7 +78,7 @@
                                   assign heading_classes = 'pb-2 md:pb-3 break-words'
                                 endif
 
-                                render 'armament-heading' with tag: 'h3', heading_content: block.settings.heading, heading_type: 'heading-3', classes: heading_classes, data_aid: 'image-with-text--heading'
+                                render 'armament-heading' with tag, tag: 'h3', heading_content: block.settings.heading, heading_type: 'heading-3', classes: heading_classes, data_aid: 'image-with-text--heading'
                               endif
                             %}
 
@@ -88,7 +88,7 @@
 
                             {% liquid
                               if block.settings.button_link != blank and block.settings.button_text != blank
-                                render 'armament-button' with url: block.settings.button_link, content: block.settings.button_text, style: block.settings.button_style, classes: "mt-2 md:mt-3 leading-none", data_aid: "image-with-text--button"
+                                render 'armament-button' with url, url: block.settings.button_link, content: block.settings.button_text, style: block.settings.button_style, classes: "mt-2 md:mt-3 leading-none", data_aid: "image-with-text--button"
                               endif
                             %}
                         </li>
@@ -98,9 +98,9 @@
 
                   {% capture svg_colors %}data-color-scheme="{{ section.settings.bg_color_scheme }}"{% endcapture %}
                   <template>
-                    {% render 'armament-slider-arrows' with hide_on_mobile: true, border: border, left_position_classes: '-left-[60px]', right_position_classes: '-right-[60px]', attributes: svg_colors %}
+                    {% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true, border: border, left_position_classes: '-left-[60px]', right_position_classes: '-right-[60px]', attributes: svg_colors %}
                     <div data-name="mobile-indicator" class="block h-1 w-full absolute bottom-0 px-4 md:px-5">
-                      {% render 'armament-scroll-bar' with classes: "bg-page", item_count: section.blocks.size, parent: 'slider-engine', target: 'slider', indicator: 'progress' %}
+                      {% render 'armament-scroll-bar' with classes, classes: "bg-page", item_count: section.blocks.size, parent: 'slider-engine', target: 'slider', indicator: 'progress' %}
                     </div>
                   </template>
                 </slider-engine>
@@ -290,3 +290,54 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% render ''armament-image'' with image: section.settings.image, classes:
+    "w-full h-full object-cover", zoomout_animation: true %}'
+  to: '{% render ''armament-image'' with image, image: section.settings.image, classes:
+    "w-full h-full object-cover", zoomout_animation: true %}'
+  position: 747..882
+- from: '{% render ''armament-placeholder'' with name: ''collection-2'', classes:
+    "!border-0" %}'
+  to: '{% render ''armament-placeholder'' with name, name: ''collection-2'', classes:
+    "!border-0" %}'
+  position: 935..1024
+- from: "                                render 'armament-heading' with tag: 'h4',
+    heading_content: block.settings.subheading, heading_type: 'heading-4', classes:
+    subheading_classes, data_aid: 'image-with-text--subheading'"
+  to: "                                render 'armament-heading' with tag, tag: 'h4',
+    heading_content: block.settings.subheading, heading_type: 'heading-4', classes:
+    subheading_classes, data_aid: 'image-with-text--subheading'"
+  position: 3273..3491
+- from: "                                render 'armament-heading' with tag: 'h3',
+    heading_content: block.settings.heading, heading_type: 'heading-3', classes: heading_classes,
+    data_aid: 'image-with-text--heading'"
+  to: "                                render 'armament-heading' with tag, tag: 'h3',
+    heading_content: block.settings.heading, heading_type: 'heading-3', classes: heading_classes,
+    data_aid: 'image-with-text--heading'"
+  position: 3904..4113
+- from: '                                render ''armament-button'' with url: block.settings.button_link,
+    content: block.settings.button_text, style: block.settings.button_style, classes:
+    "mt-2 md:mt-3 leading-none", data_aid: "image-with-text--button"'
+  to: '                                render ''armament-button'' with url, url: block.settings.button_link,
+    content: block.settings.button_text, style: block.settings.button_style, classes:
+    "mt-2 md:mt-3 leading-none", data_aid: "image-with-text--button"'
+  position: 4535..4781
+- from: "{% render 'armament-slider-arrows' with hide_on_mobile: true, border: border,
+    left_position_classes: '-left-[60px]', right_position_classes: '-right-[60px]',
+    attributes: svg_colors %}"
+  to: "{% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true,
+    border: border, left_position_classes: '-left-[60px]', right_position_classes:
+    '-right-[60px]', attributes: svg_colors %}"
+  position: 5132..5331
+- from: '{% render ''armament-scroll-bar'' with classes: "bg-page", item_count: section.blocks.size,
+    parent: ''slider-engine'', target: ''slider'', indicator: ''progress'' %}'
+  to: '{% render ''armament-scroll-bar'' with classes, classes: "bg-page", item_count:
+    section.blocks.size, parent: ''slider-engine'', target: ''slider'', indicator:
+    ''progress'' %}'
+  position: 5465..5631
+{% endcomment %}

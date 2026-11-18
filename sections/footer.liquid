@@ -9,7 +9,7 @@
 
               {% when "logo" %}
                 <div class="footer_logo_container " {{ block.shopify_attributes }}>
-                  {% render 'armament-logo' with logo_image: block.settings.footer_logo, width_desktop: block.settings.logo_width_desktop, width_mobile: block.settings.logo_width_mobile, tag: 'h2', text_classes: 'text-h4 leading-none', image_classes: 'logo min-w-[50px] lg:min-w-[80px]', section_id: section.id %}
+                  {% render 'armament-logo' with logo_image, logo_image: block.settings.footer_logo, width_desktop: block.settings.logo_width_desktop, width_mobile: block.settings.logo_width_mobile, tag: 'h2', text_classes: 'text-h4 leading-none', image_classes: 'logo min-w-[50px] lg:min-w-[80px]', section_id: section.id %}
                 </div>
 
               {% when "image" %}
@@ -17,7 +17,7 @@
                   {% if block.settings.image_link != blank %}
                     <a href="{{ block.settings.image_link }}">
                   {% endif %}
-                    {% render 'armament-image' with image: block.settings.image %}
+                    {% render 'armament-image' with image, image: block.settings.image %}
                   {% if block.settings.image_link != blank %}
                     </a>
                   {% endif %}
@@ -26,14 +26,14 @@
               {% when "links" %}
                 <div {{ block.shopify_attributes }}>
                   {% if block.settings.footer_links_heading != blank %}
-                    {% render 'armament-heading' with tag: 'h5', heading_content: block.settings.footer_links_heading, classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_links_heading' %}
+                    {% render 'armament-heading' with tag, tag: 'h5', heading_content: block.settings.footer_links_heading, classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_links_heading' %}
                   {% endif %}
 
                   {% if block.settings.footer_navigation != blank %}
                     <ul role="navigation">
                       {% for link in block.settings.footer_navigation.links %}
                         {% if link.links != blank %}
-                          <li class="d-block pb-2 last:pb-0 pt-3 md:pt-4 first:pt-0"><a href="{{ link.url }}">{% render 'armament-heading' with heading_content: link.title, tag: 'h6', heading_type: 'heading-6' %}</a></li>
+                          <li class="d-block pb-2 last:pb-0 pt-3 md:pt-4 first:pt-0"><a href="{{ link.url }}">{% render 'armament-heading' with heading_content, heading_content: link.title, tag: 'h6', heading_type: 'heading-6' %}</a></li>
                           {% for child_link in link.links %}
                             <li class="d-block{% unless forloop.last %}{% if link.links.size > 1 %} pb-2{% endif %}{% endunless %} last:pb-0 indent-2"><a href="{{ child_link.url }}">{{ child_link.title }}</a></li>
                           {% endfor %}
@@ -48,7 +48,7 @@
               {% when "footer_text" %}
                 <div class="footer_text " {{ block.shopify_attributes }}>
                   {% if block.settings.footer_text_heading != blank %}
-                    {% render 'armament-heading' with tag: 'h5', heading_content: block.settings.footer_text_heading, classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_text_heading' %}
+                    {% render 'armament-heading' with tag, tag: 'h5', heading_content: block.settings.footer_text_heading, classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_text_heading' %}
                   {% endif %}
 
                   {% if block.settings.footer_text_content != blank %}
@@ -61,7 +61,7 @@
               {% when "follow_on_shop" %}
                 <div class="footer_text " {{ block.shopify_attributes }}>
                   {% if block.settings.title != blank %}
-                    {% render 'armament-heading' with tag: 'h5', heading_content: block.settings.title, classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_text_heading' %}
+                    {% render 'armament-heading' with tag, tag: 'h5', heading_content: block.settings.title, classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_text_heading' %}
                   {% endif %}
 
                   {% if shop.features.follow_on_shop? %}
@@ -72,7 +72,7 @@
               {% when "footer_newsletter" %}
                 <div class="footer_newsletter " {{ block.shopify_attributes }}>
                   {% if block.settings.footer_newsletter_heading != blank %}
-                    {% render 'armament-heading' with tag: 'h5', heading_content: block.settings.footer_newsletter_heading, classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_newsletter_heading' %}
+                    {% render 'armament-heading' with tag, tag: 'h5', heading_content: block.settings.footer_newsletter_heading, classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_newsletter_heading' %}
                   {% endif %}
 
                   {% if block.settings.footer_newsletter_content != blank %}
@@ -99,12 +99,12 @@
 
                     <div class="input-group items-center grid grid-cols-2 grid-rows-1">
                       <span class="col-start-1 col-end-3 row-start-1 row-end-2">
-                        {% render 'armament-input' with type: 'hidden', value: 'newsletter', name: 'contact[tags]', has_label: false %}
-                        {% render 'armament-input' with type: 'email', has_label: true, animate_label: true, label_text: 'email', id: 'newsletter', value: customer.email, placeholder: email_placeholder, name: 'contact[email]', attributes: aria_attribute, required: true, classes: 'w-full border-body border-2 bg-page placeholder-body !pr-[2rem]' %}
+                        {% render 'armament-input' with type, type: 'hidden', value: 'newsletter', name: 'contact[tags]', has_label: false %}
+                        {% render 'armament-input' with type, type: 'email', has_label: true, animate_label: true, label_text: 'email', id: 'newsletter', value: customer.email, placeholder: email_placeholder, name: 'contact[email]', attributes: aria_attribute, required: true, classes: 'w-full border-body border-2 bg-page placeholder-body !pr-[2rem]' %}
                       </span>
                       <span class="col-start-2 col-end-3 row-start-1 row-end-2 items-center justify-items-end grid grid-rows-1 grid-cols-1 max-w-max justify-self-end z-[1] group">
-                        {% render 'armament-input' with type: 'submit', name: 'subscribe', id: 'subscribe', value: "", attributes: aria_label_submit, classes: 'w-44 h-44 col-start-1 col-end-1 row-start-1 row-end-1 bg-transparent z-50 cursor-pointer' %}
-                        {% render 'armament-icon' with icon: 'arrow-right', classes: 'col-start-1 col-end-1 row-start-1 row-end-1 mr-10 z-100 cursor-pointer' %}
+                        {% render 'armament-input' with type, type: 'submit', name: 'subscribe', id: 'subscribe', value: "", attributes: aria_label_submit, classes: 'w-44 h-44 col-start-1 col-end-1 row-start-1 row-end-1 bg-transparent z-50 cursor-pointer' %}
+                        {% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'col-start-1 col-end-1 row-start-1 row-end-1 mr-10 z-100 cursor-pointer' %}
                       </span>
                     </div>
                   {% endform %}
@@ -113,7 +113,7 @@
               {% when "footer_social_media_icons" %}
                 <div class="footer_social_media_icons" {{ block.shopify_attributes }}>
                   {% if block.settings.footer_social_media_heading != blank %}
-                    {% render 'armament-heading' with tag: 'h5', heading_content: block.settings.footer_social_media_heading, classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_social_media_heading' %}
+                    {% render 'armament-heading' with tag, tag: 'h5', heading_content: block.settings.footer_social_media_heading, classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_social_media_heading' %}
                   {% endif %}
 
                   {%- liquid
@@ -131,12 +131,7 @@
                   -%}
 
                   {% if footer_social_accounts %}
-                    {% render 'ship-social-media-icons' with
-                      show_labels: block.settings.show_labels,
-                      icons_shape: block.settings.icons_shape,
-                      original_icons: original_icons,
-                      icons_color: icons_color
-                    %}
+                    {% render 'ship-social-media-icons' with show_labels, show_labels: block.settings.show_labels, icons_shape: block.settings.icons_shape, original_icons: original_icons, icons_color: icons_color %}
                   {% else %}
                     <div class="p-2 prose text-sm italic border border-dashed">
                       <p>Please note, this message will only display in the editor.</p>
@@ -441,3 +436,103 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-logo' with logo_image: block.settings.footer_logo, width_desktop:
+    block.settings.logo_width_desktop, width_mobile: block.settings.logo_width_mobile,
+    tag: 'h2', text_classes: 'text-h4 leading-none', image_classes: 'logo min-w-[50px]
+    lg:min-w-[80px]', section_id: section.id %}"
+  to: "{% render 'armament-logo' with logo_image, logo_image: block.settings.footer_logo,
+    width_desktop: block.settings.logo_width_desktop, width_mobile: block.settings.logo_width_mobile,
+    tag: 'h2', text_classes: 'text-h4 leading-none', image_classes: 'logo min-w-[50px]
+    lg:min-w-[80px]', section_id: section.id %}"
+  position: 733..1040
+- from: "{% render 'armament-image' with image: block.settings.image %}"
+  to: "{% render 'armament-image' with image, image: block.settings.image %}"
+  position: 1346..1415
+- from: "{% render 'armament-heading' with tag: 'h5', heading_content: block.settings.footer_links_heading,
+    classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_links_heading'
+    %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h5', heading_content: block.settings.footer_links_heading,
+    classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_links_heading'
+    %}"
+  position: 1735..1931
+- from: "{% render 'armament-heading' with heading_content: link.title, tag: 'h6',
+    heading_type: 'heading-6' %}"
+  to: "{% render 'armament-heading' with heading_content, heading_content: link.title,
+    tag: 'h6', heading_type: 'heading-6' %}"
+  position: 2317..2436
+- from: "{% render 'armament-heading' with tag: 'h5', heading_content: block.settings.footer_text_heading,
+    classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_text_heading'
+    %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h5', heading_content: block.settings.footer_text_heading,
+    classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_text_heading'
+    %}"
+  position: 3271..3465
+- from: "{% render 'armament-heading' with tag: 'h5', heading_content: block.settings.title,
+    classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_text_heading'
+    %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h5', heading_content: block.settings.title,
+    classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_text_heading'
+    %}"
+  position: 4055..4235
+- from: "{% render 'armament-heading' with tag: 'h5', heading_content: block.settings.footer_newsletter_heading,
+    classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_newsletter_heading'
+    %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h5', heading_content: block.settings.footer_newsletter_heading,
+    classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_newsletter_heading'
+    %}"
+  position: 4666..4872
+- from: "{% render 'armament-input' with type: 'hidden', value: 'newsletter', name:
+    'contact[tags]', has_label: false %}"
+  to: "{% render 'armament-input' with type, type: 'hidden', value: 'newsletter',
+    name: 'contact[tags]', has_label: false %}"
+  position: 6533..6650
+- from: "{% render 'armament-input' with type: 'email', has_label: true, animate_label:
+    true, label_text: 'email', id: 'newsletter', value: customer.email, placeholder:
+    email_placeholder, name: 'contact[email]', attributes: aria_attribute, required:
+    true, classes: 'w-full border-body border-2 bg-page placeholder-body !pr-[2rem]'
+    %}"
+  to: "{% render 'armament-input' with type, type: 'email', has_label: true, animate_label:
+    true, label_text: 'email', id: 'newsletter', value: customer.email, placeholder:
+    email_placeholder, name: 'contact[email]', attributes: aria_attribute, required:
+    true, classes: 'w-full border-body border-2 bg-page placeholder-body !pr-[2rem]'
+    %}"
+  position: 6675..7005
+- from: '{% render ''armament-input'' with type: ''submit'', name: ''subscribe'',
+    id: ''subscribe'', value: "", attributes: aria_label_submit, classes: ''w-44 h-44
+    col-start-1 col-end-1 row-start-1 row-end-1 bg-transparent z-50 cursor-pointer''
+    %}'
+  to: '{% render ''armament-input'' with type, type: ''submit'', name: ''subscribe'',
+    id: ''subscribe'', value: "", attributes: aria_label_submit, classes: ''w-44 h-44
+    col-start-1 col-end-1 row-start-1 row-end-1 bg-transparent z-50 cursor-pointer''
+    %}'
+  position: 7240..7474
+- from: "{% render 'armament-icon' with icon: 'arrow-right', classes: 'col-start-1
+    col-end-1 row-start-1 row-end-1 mr-10 z-100 cursor-pointer' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'col-start-1
+    col-end-1 row-start-1 row-end-1 mr-10 z-100 cursor-pointer' %}"
+  position: 7499..7641
+- from: "{% render 'armament-heading' with tag: 'h5', heading_content: block.settings.footer_social_media_heading,
+    classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_social_media_heading'
+    %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h5', heading_content: block.settings.footer_social_media_heading,
+    classes: 'text-h5 font-semibold uppercase pb-3 md:pb-4', data_aid: 'footer_social_media_heading'
+    %}"
+  position: 7994..8204
+- from: |-
+    {% render 'ship-social-media-icons' with
+                          show_labels: block.settings.show_labels,
+                          icons_shape: block.settings.icons_shape,
+                          original_icons: original_icons,
+                          icons_color: icons_color
+                        %}
+  to: "{% render 'ship-social-media-icons' with show_labels, show_labels: block.settings.show_labels,
+    icons_shape: block.settings.icons_shape, original_icons: original_icons, icons_color:
+    icons_color %}"
+  position: 9159..9354
+{% endcomment %}

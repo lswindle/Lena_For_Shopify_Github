@@ -15,10 +15,10 @@
   {% if request.design_mode %}
     <div>
       {% for block in section.blocks %}
-        {% render 'ship-badge-preview-single' with badge_block: block %}
+        {% render 'ship-badge-preview-single' with badge_block, badge_block: block %}
       {% endfor %}
     
-      {% render 'ship-badge-preview-multiple' with badge_section: section %}
+      {% render 'ship-badge-preview-multiple' with badge_section, badge_section: section %}
     </div>
   {% endif %}
 
@@ -184,3 +184,18 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'ship-badge-preview-single' with badge_block: block %}"
+  to: "{% render 'ship-badge-preview-single' with badge_block, badge_block: block
+    %}"
+  position: 813..890
+- from: "{% render 'ship-badge-preview-multiple' with badge_section: section %}"
+  to: "{% render 'ship-badge-preview-multiple' with badge_section, badge_section:
+    section %}"
+  position: 921..1006
+{% endcomment %}

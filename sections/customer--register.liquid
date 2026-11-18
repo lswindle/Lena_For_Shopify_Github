@@ -3,12 +3,7 @@
   <div class="max-w-screen-sm w-full">
 
     {% assign createAccountString = 'customer.register.title' | t %}
-    {% render 'armament-heading' with
-    tag: 'h2',
-    heading_content: createAccountString,
-    heading_type: 'heading-2',
-    data_aid: "create-acc-heading",
-    classes: 'text-center mb-4 md:mb-6' %}
+    {% render 'armament-heading' with tag, tag: 'h2', heading_content: createAccountString, heading_type: 'heading-2', data_aid: "create-acc-heading", classes: 'text-center mb-4 md:mb-6' %}
 
     {%- form 'create_customer', novalidate: 'novalidate' -%}
       {%- if form.errors -%}
@@ -25,18 +20,7 @@
         {% endif %}
       {% endcapture %}
       {% assign firstNameString = 'customer.register.first_name' | t %}
-      {% render 'armament-input' with
-      type: "text",
-      has_label: true,
-      animate_label: true,
-      label_text: firstNameString,
-      id: "RegisterForm-FirstName",
-      placeholder: "First name",
-      name: "customer[first_name]",
-      required: true,
-      attributes: name_attr,
-      container_classes: 'mb-3 md:mb-4 text-body',
-      classes: 'w-full' %}
+      {% render 'armament-input' with type, type: "text", has_label: true, animate_label: true, label_text: firstNameString, id: "RegisterForm-FirstName", placeholder: "First name", name: "customer[first_name]", required: true, attributes: name_attr, container_classes: 'mb-3 md:mb-4 text-body', classes: 'w-full' %}
 
       {% capture surname_attr %}
         autocomplete="family-name"
@@ -45,18 +29,7 @@
         {% endif %}
       {% endcapture %}
       {% assign lastNameString = 'customer.register.last_name' | t %}
-      {% render 'armament-input' with
-      type: "text",
-      has_label: true,
-      animate_label: true,
-      label_text: lastNameString,
-      id: "RegisterForm-LastName",
-      placeholder: "Last name",
-      name: "customer[last_name]",
-      required: true,
-      attributes: surname_attr,
-      container_classes: 'mb-3 md:mb-4 text-body',
-      classes: 'w-full' %}
+      {% render 'armament-input' with type, type: "text", has_label: true, animate_label: true, label_text: lastNameString, id: "RegisterForm-LastName", placeholder: "Last name", name: "customer[last_name]", required: true, attributes: surname_attr, container_classes: 'mb-3 md:mb-4 text-body', classes: 'w-full' %}
 
       {% capture email_attr %}
         spellcheck="false"
@@ -70,18 +43,7 @@
         {% endif %}
       {% endcapture %}
       {% assign emailString = 'customer.register.email' | t %}
-      {% render 'armament-input' with
-      type: "email",
-      has_label: true,
-      animate_label: true,
-      label_text: emailString,
-      id: "RegisterForm-email",
-      placeholder: "Email",
-      name: "customer[email]",
-      required: true,
-      attributes: email_attr,
-      container_classes: 'mb-3 md:mb-4 text-body',
-      classes: 'w-full' %}
+      {% render 'armament-input' with type, type: "email", has_label: true, animate_label: true, label_text: emailString, id: "RegisterForm-email", placeholder: "Email", name: "customer[email]", required: true, attributes: email_attr, container_classes: 'mb-3 md:mb-4 text-body', classes: 'w-full' %}
 
       {% capture password_attr %}
         {% if form.errors contains 'password' %}
@@ -89,27 +51,112 @@
       {% endif %}
       {% endcapture %}
       {% assign passwordString = 'customer.register.password' | t %}
-      {% render 'armament-input' with
-      type: "password",
-      has_label: true,
-      animate_label: true,
-      label_text: passwordString,
-      id: "RegisterForm-password",
-      placeholder: "Password",
-      name: "customer[password]",
-      required: true,
-      attributes: password_attr,
-      container_classes: 'mb-3 md:mb-4 text-body',
-      classes: 'w-full' %}
+      {% render 'armament-input' with type, type: "password", has_label: true, animate_label: true, label_text: passwordString, id: "RegisterForm-password", placeholder: "Password", name: "customer[password]", required: true, attributes: password_attr, container_classes: 'mb-3 md:mb-4 text-body', classes: 'w-full' %}
 
       {% assign submitString = 'customer.register.submit' | t %}
-      {% render 'armament-button' with
-      content: submitString,
-      style: 'filled',
-      classes: 'mb-3 md:mb-4 w-full',
-      data_aid: 'create-acc-btn' %}
+      {% render 'armament-button' with content, content: submitString, style: 'filled', classes: 'mb-3 md:mb-4 w-full', data_aid: 'create-acc-btn' %}
 
     {%- endform -%}
 
   </div>
 </div>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with
+        tag: 'h2',
+        heading_content: createAccountString,
+        heading_type: 'heading-2',
+        data_aid: "create-acc-heading",
+        classes: 'text-center mb-4 md:mb-6' %}
+  to: '{% render ''armament-heading'' with tag, tag: ''h2'', heading_content: createAccountString,
+    heading_type: ''heading-2'', data_aid: "create-acc-heading", classes: ''text-center
+    mb-4 md:mb-6'' %}'
+  position: 184..369
+- from: |-
+    {% render 'armament-input' with
+          type: "text",
+          has_label: true,
+          animate_label: true,
+          label_text: firstNameString,
+          id: "RegisterForm-FirstName",
+          placeholder: "First name",
+          name: "customer[first_name]",
+          required: true,
+          attributes: name_attr,
+          container_classes: 'mb-3 md:mb-4 text-body',
+          classes: 'w-full' %}
+  to: '{% render ''armament-input'' with type, type: "text", has_label: true, animate_label:
+    true, label_text: firstNameString, id: "RegisterForm-FirstName", placeholder:
+    "First name", name: "customer[first_name]", required: true, attributes: name_attr,
+    container_classes: ''mb-3 md:mb-4 text-body'', classes: ''w-full'' %}'
+  position: 1060..1370
+- from: |-
+    {% render 'armament-input' with
+          type: "text",
+          has_label: true,
+          animate_label: true,
+          label_text: lastNameString,
+          id: "RegisterForm-LastName",
+          placeholder: "Last name",
+          name: "customer[last_name]",
+          required: true,
+          attributes: surname_attr,
+          container_classes: 'mb-3 md:mb-4 text-body',
+          classes: 'w-full' %}
+  to: '{% render ''armament-input'' with type, type: "text", has_label: true, animate_label:
+    true, label_text: lastNameString, id: "RegisterForm-LastName", placeholder: "Last
+    name", name: "customer[last_name]", required: true, attributes: surname_attr,
+    container_classes: ''mb-3 md:mb-4 text-body'', classes: ''w-full'' %}'
+  position: 1630..1939
+- from: |-
+    {% render 'armament-input' with
+          type: "email",
+          has_label: true,
+          animate_label: true,
+          label_text: emailString,
+          id: "RegisterForm-email",
+          placeholder: "Email",
+          name: "customer[email]",
+          required: true,
+          attributes: email_attr,
+          container_classes: 'mb-3 md:mb-4 text-body',
+          classes: 'w-full' %}
+  to: '{% render ''armament-input'' with type, type: "email", has_label: true, animate_label:
+    true, label_text: emailString, id: "RegisterForm-email", placeholder: "Email",
+    name: "customer[email]", required: true, attributes: email_attr, container_classes:
+    ''mb-3 md:mb-4 text-body'', classes: ''w-full'' %}'
+  position: 2328..2622
+- from: |-
+    {% render 'armament-input' with
+          type: "password",
+          has_label: true,
+          animate_label: true,
+          label_text: passwordString,
+          id: "RegisterForm-password",
+          placeholder: "Password",
+          name: "customer[password]",
+          required: true,
+          attributes: password_attr,
+          container_classes: 'mb-3 md:mb-4 text-body',
+          classes: 'w-full' %}
+  to: '{% render ''armament-input'' with type, type: "password", has_label: true,
+    animate_label: true, label_text: passwordString, id: "RegisterForm-password",
+    placeholder: "Password", name: "customer[password]", required: true, attributes:
+    password_attr, container_classes: ''mb-3 md:mb-4 text-body'', classes: ''w-full''
+    %}'
+  position: 2853..3165
+- from: |-
+    {% render 'armament-button' with
+          content: submitString,
+          style: 'filled',
+          classes: 'mb-3 md:mb-4 w-full',
+          data_aid: 'create-acc-btn' %}
+  to: "{% render 'armament-button' with content, content: submitString, style: 'filled',
+    classes: 'mb-3 md:mb-4 w-full', data_aid: 'create-acc-btn' %}"
+  position: 3238..3381
+{% endcomment %}

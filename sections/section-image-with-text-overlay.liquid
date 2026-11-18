@@ -67,19 +67,19 @@
     <div class="col-start-1 col-end-2 row-start-1 row-end-4 z-5 overflow-hidden">
       {% liquid
         if section.settings.desktop_image != blank and section.settings.mobile_image != blank
-          render 'armament-image' with image: section.settings.desktop_image, classes: 'hidden md:block md:object-cover h-full w-full', zoomout_animation: true, sizes: desktop_sizes
-          render 'armament-image' with image: section.settings.mobile_image, classes: mobile_image_classes, zoomout_animation: true
+          render 'armament-image' with image, image: section.settings.desktop_image, classes: 'hidden md:block md:object-cover h-full w-full', zoomout_animation: true, sizes: desktop_sizes
+          render 'armament-image' with image, image: section.settings.mobile_image, classes: mobile_image_classes, zoomout_animation: true
 
         elsif section.settings.desktop_image != blank and section.settings.mobile_image == blank
-          render 'armament-image' with image: section.settings.desktop_image, classes: 'object-cover h-full w-full', zoomout_animation: true, sizes: desktop_sizes
+          render 'armament-image' with image, image: section.settings.desktop_image, classes: 'object-cover h-full w-full', zoomout_animation: true, sizes: desktop_sizes
 
         elsif section.settings.desktop_image == blank and section.settings.mobile_image != blank
-          render 'armament-placeholder' with name: 'lifestyle-2', classes: 'hidden md:block h-full w-full'
-          render 'armament-image' with image: section.settings.mobile_image, classes: mobile_image_classes, zoomout_animation: true
+          render 'armament-placeholder' with name, name: 'lifestyle-2', classes: 'hidden md:block h-full w-full'
+          render 'armament-image' with image, image: section.settings.mobile_image, classes: mobile_image_classes, zoomout_animation: true
 
         elsif section.settings.desktop_image == blank and section.settings.mobile_image == blank
-          render 'armament-placeholder' with name: 'lifestyle-2', classes: 'hidden md:block w-full h-full'
-          render 'armament-placeholder' with name: 'collection-1', classes: mobile_image_classes
+          render 'armament-placeholder' with name, name: 'lifestyle-2', classes: 'hidden md:block w-full h-full'
+          render 'armament-placeholder' with name, name: 'collection-1', classes: mobile_image_classes
         endif
       %}
     </div>
@@ -93,20 +93,20 @@
 
             <div class="flex flex-col {{ vertical_align }} {{ horizontal_align }}" data-color-scheme='{{ block.settings.text_color_scheme }}'>
               {% if block.settings.section_subheading != blank %}
-                {% render 'armament-heading' with tag: 'h3', heading_content: block.settings.section_subheading, heading_type: 'heading-5', classes: 'text-body', data_aid: 'img-w-text-overlay-subheading' %}
+                {% render 'armament-heading' with tag, tag: 'h3', heading_content: block.settings.section_subheading, heading_type: 'heading-5', classes: 'text-body', data_aid: 'img-w-text-overlay-subheading' %}
               {% endif %}
 
               {% if block.settings.title != blank %}
-                {% render 'armament-heading' with tag: 'h2', heading_content: block.settings.title, heading_type: 'heading-3', classes: 'text-body mt-3 md:mt-3', data_aid: 'img-w-text-overlay-heading' %}
+                {% render 'armament-heading' with tag, tag: 'h2', heading_content: block.settings.title, heading_type: 'heading-3', classes: 'text-body mt-3 md:mt-3', data_aid: 'img-w-text-overlay-heading' %}
               {% endif %}
 
               <div class="button_container flex flex-col md:flex-row">
                 {% if block.settings.button_1_text != blank and block.settings.button_1_link != blank %}
-                  {% render 'armament-button' with url: block.settings.button_1_link, content: block.settings.button_1_text, style: block.settings.button_1_style, type: 'button', classes: 'mt-3 md:mt-4 last:mr-0 md:mr-4', data_aid: "img-w-text-overlay-button-1" %}
+                  {% render 'armament-button' with url, url: block.settings.button_1_link, content: block.settings.button_1_text, style: block.settings.button_1_style, type: 'button', classes: 'mt-3 md:mt-4 last:mr-0 md:mr-4', data_aid: "img-w-text-overlay-button-1" %}
                 {% endif %}
 
                 {% if block.settings.button_2_text != blank and block.settings.button_2_link != blank %}
-                  {% render 'armament-button' with url: block.settings.button_2_link, content: block.settings.button_2_text, style: block.settings.button_2_style, type: 'button', classes: 'mt-3 md:mt-4', data_aid: "img-w-text-overlay-button-2" %}
+                  {% render 'armament-button' with url, url: block.settings.button_2_link, content: block.settings.button_2_text, style: block.settings.button_2_style, type: 'button', classes: 'mt-3 md:mt-4', data_aid: "img-w-text-overlay-button-2" %}
                 {% endif %}
               </div>
             </div>
@@ -133,16 +133,7 @@
                 endif
               -%}
               <div class="flex flex-col {{ vertical_align }} {{ horizontal_align }} {{ social_cta_classes }}">
-                {% render 'ship-social-callout' with
-                  link: block.settings.social_link,
-                  text: block.settings.social_link_text,
-                  color_scheme:  block.settings.social_color_scheme,
-                  transparent: block.settings.transparent_bg,
-                  social_icon: block.settings.social_icon,
-                  icon_shape: block.settings.social_icon_shape,
-                  icon_size:  block.settings.icon_size,
-                  animate: false,
-                %}
+                {% render 'ship-social-callout' with link, link: block.settings.social_link, text: block.settings.social_link_text, color_scheme: block.settings.social_color_scheme, transparent: block.settings.transparent_bg, social_icon: block.settings.social_icon, icon_shape: block.settings.social_icon_shape, icon_size: block.settings.icon_size, animate: false %}
               </div>
             {% endunless %}
         {% endcase %}
@@ -629,4 +620,95 @@
     ]
   }
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "          render 'armament-image' with image: section.settings.desktop_image,
+    classes: 'hidden md:block md:object-cover h-full w-full', zoomout_animation: true,
+    sizes: desktop_sizes"
+  to: "          render 'armament-image' with image, image: section.settings.desktop_image,
+    classes: 'hidden md:block md:object-cover h-full w-full', zoomout_animation: true,
+    sizes: desktop_sizes"
+  position: 2509..2697
+- from: "          render 'armament-image' with image: section.settings.mobile_image,
+    classes: mobile_image_classes, zoomout_animation: true"
+  to: "          render 'armament-image' with image, image: section.settings.mobile_image,
+    classes: mobile_image_classes, zoomout_animation: true"
+  position: 2698..2836
+- from: "          render 'armament-image' with image: section.settings.desktop_image,
+    classes: 'object-cover h-full w-full', zoomout_animation: true, sizes: desktop_sizes"
+  to: "          render 'armament-image' with image, image: section.settings.desktop_image,
+    classes: 'object-cover h-full w-full', zoomout_animation: true, sizes: desktop_sizes"
+  position: 2935..3104
+- from: "          render 'armament-placeholder' with name: 'lifestyle-2', classes:
+    'hidden md:block h-full w-full'"
+  to: "          render 'armament-placeholder' with name, name: 'lifestyle-2', classes:
+    'hidden md:block h-full w-full'"
+  position: 3203..3315
+- from: "          render 'armament-image' with image: section.settings.mobile_image,
+    classes: mobile_image_classes, zoomout_animation: true"
+  to: "          render 'armament-image' with image, image: section.settings.mobile_image,
+    classes: mobile_image_classes, zoomout_animation: true"
+  position: 3316..3454
+- from: "          render 'armament-placeholder' with name: 'lifestyle-2', classes:
+    'hidden md:block w-full h-full'"
+  to: "          render 'armament-placeholder' with name, name: 'lifestyle-2', classes:
+    'hidden md:block w-full h-full'"
+  position: 3553..3665
+- from: "          render 'armament-placeholder' with name: 'collection-1', classes:
+    mobile_image_classes"
+  to: "          render 'armament-placeholder' with name, name: 'collection-1', classes:
+    mobile_image_classes"
+  position: 3666..3768
+- from: "{% render 'armament-heading' with tag: 'h3', heading_content: block.settings.section_subheading,
+    heading_type: 'heading-5', classes: 'text-body', data_aid: 'img-w-text-overlay-subheading'
+    %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h3', heading_content: block.settings.section_subheading,
+    heading_type: 'heading-5', classes: 'text-body', data_aid: 'img-w-text-overlay-subheading'
+    %}"
+  position: 4528..4723
+- from: "{% render 'armament-heading' with tag: 'h2', heading_content: block.settings.title,
+    heading_type: 'heading-3', classes: 'text-body mt-3 md:mt-3', data_aid: 'img-w-text-overlay-heading'
+    %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: block.settings.title,
+    heading_type: 'heading-3', classes: 'text-body mt-3 md:mt-3', data_aid: 'img-w-text-overlay-heading'
+    %}"
+  position: 4820..5012
+- from: '{% render ''armament-button'' with url: block.settings.button_1_link, content:
+    block.settings.button_1_text, style: block.settings.button_1_style, type: ''button'',
+    classes: ''mt-3 md:mt-4 last:mr-0 md:mr-4'', data_aid: "img-w-text-overlay-button-1"
+    %}'
+  to: '{% render ''armament-button'' with url, url: block.settings.button_1_link,
+    content: block.settings.button_1_text, style: block.settings.button_1_style, type:
+    ''button'', classes: ''mt-3 md:mt-4 last:mr-0 md:mr-4'', data_aid: "img-w-text-overlay-button-1"
+    %}'
+  position: 5234..5485
+- from: '{% render ''armament-button'' with url: block.settings.button_2_link, content:
+    block.settings.button_2_text, style: block.settings.button_2_style, type: ''button'',
+    classes: ''mt-3 md:mt-4'', data_aid: "img-w-text-overlay-button-2" %}'
+  to: '{% render ''armament-button'' with url, url: block.settings.button_2_link,
+    content: block.settings.button_2_text, style: block.settings.button_2_style, type:
+    ''button'', classes: ''mt-3 md:mt-4'', data_aid: "img-w-text-overlay-button-2"
+    %}'
+  position: 5638..5871
+- from: |-
+    {% render 'ship-social-callout' with
+                      link: block.settings.social_link,
+                      text: block.settings.social_link_text,
+                      color_scheme:  block.settings.social_color_scheme,
+                      transparent: block.settings.transparent_bg,
+                      social_icon: block.settings.social_icon,
+                      icon_shape: block.settings.social_icon_shape,
+                      icon_size:  block.settings.icon_size,
+                      animate: false,
+                    %}
+  to: "{% render 'ship-social-callout' with link, link: block.settings.social_link,
+    text: block.settings.social_link_text, color_scheme: block.settings.social_color_scheme,
+    transparent: block.settings.transparent_bg, social_icon: block.settings.social_icon,
+    icon_shape: block.settings.social_icon_shape, icon_size: block.settings.icon_size,
+    animate: false %}"
+  position: 7148..7499
+{%- endcomment -%}

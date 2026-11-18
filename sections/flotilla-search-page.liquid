@@ -8,12 +8,12 @@
         {% for result in search.results %}
           <div class="p-3 md:p-4 border border-body-opacity-20" loadin-animation-elm loadin-animation-delay>
             {% assign text = result.content | strip_html | truncate: 150 %}
-            {% render 'armament-heading' with tag: 'h3', heading_type: 'heading-4', classes: 'mb-2', heading_content: result.title, data_aid: 'page-result-heading' %}
+            {% render 'armament-heading' with tag, tag: 'h3', heading_type: 'heading-4', classes: 'mb-2', heading_content: result.title, data_aid: 'page-result-heading' %}
             <div class="mb-3 md:mb-4 prose">{{ text }}</div>
             <div class="text-h6 font-heading heading-case">
               <a href="{{ result.url }}" class="flex items-center group" aria-label="{{ 'blogs.article.read_more_title' | t: title: result.title | escape }}">
                 <span>{{ 'blogs.article.read_more' | t }}</span>
-                {% render 'armament-icon' with icon: 'arrow-right', width: 16, height: 16, classes: 'pl-2' %}
+                {% render 'armament-icon' with icon, icon: 'arrow-right', width: 16, height: 16, classes: 'pl-2' %}
               </a>
             </div>
           </div>
@@ -26,7 +26,7 @@
       </safe-load-scripts>
       {% endif %}
     {% else %}
-      {% render 'ship-search-no-results' with type: 'page' %}
+      {% render 'ship-search-no-results' with type, type: 'page' %}
     {% endif %}
   {% endif %}
 
@@ -36,3 +36,24 @@
   "class": "bg-page w-full"
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-heading' with tag: 'h3', heading_type: 'heading-4', classes:
+    'mb-2', heading_content: result.title, data_aid: 'page-result-heading' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h3', heading_type: 'heading-4',
+    classes: 'mb-2', heading_content: result.title, data_aid: 'page-result-heading'
+    %}"
+  position: 590..749
+- from: "{% render 'armament-icon' with icon: 'arrow-right', width: 16, height: 16,
+    classes: 'pl-2' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-right', width: 16, height:
+    16, classes: 'pl-2' %}"
+  position: 1111..1210
+- from: "{% render 'ship-search-no-results' with type: 'page' %}"
+  to: "{% render 'ship-search-no-results' with type, type: 'page' %}"
+  position: 1615..1676
+{% endcomment %}

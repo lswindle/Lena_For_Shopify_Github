@@ -51,13 +51,13 @@
 <section {% unless show_img %}data-color-scheme="{{ section.settings.section_color_scheme }}"{% endunless %} class="grid grid-cols-1 text-center {% unless show_img %}bg-page text-body{% endunless %} {% if content_over_image %}grid-rows-1{% else %}grid-rows-[repeat(2,minmax(0,auto))]{% endif %}">
   {% if show_img and collection.image != blank %}
     <div class="{{ img_container_height }} col-start-1 col-end-2 {% if content_over_image %}row-start-1 row-end-3{% else %}row-start-1 row-end-2{% endif %}">
-      {% render 'armament-image' with image: collection.image, classes: img_height, alt: collection.image.alt, sizes: '100vw' %}
+      {% render 'armament-image' with image, image: collection.image, classes: img_height, alt: collection.image.alt, sizes: '100vw' %}
     </div>
   {% endif %}
   {% if show_title %}
     <div data-color-scheme="{{ section.settings.section_color_scheme }}" class="{{ content_start_end }} z-20 flex flex-col{% if section.settings.text_align == 'center' %} items-center{% elsif section.settings.text_align == 'right' %} items-end{% endif %} justify-center py-5 px-3 md:px-6 mx-auto w-full text-body{% unless content_over_image %} bg-page{% endunless %}{% if content_over_image %} my-0 max-w-full{% endif %}{% if show_title == false or collection.title == blank %} py-0{% endif %}" {{ overlay_bg }}>
       <div class="text-{{ section.settings.text_align }}">
-        {% render 'armament-heading' with tag: 'h2', heading_type: 'heading-3', heading_content: collection.title, data_aid: 'collection-title' %}
+        {% render 'armament-heading' with tag, tag: 'h2', heading_type: 'heading-3', heading_content: collection.title, data_aid: 'collection-title' %}
       </div>
     </div>
   {% endif %}
@@ -187,4 +187,20 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-image' with image: collection.image, classes: img_height,
+    alt: collection.image.alt, sizes: '100vw' %}"
+  to: "{% render 'armament-image' with image, image: collection.image, classes: img_height,
+    alt: collection.image.alt, sizes: '100vw' %}"
+  position: 2322..2451
+- from: "{% render 'armament-heading' with tag: 'h2', heading_type: 'heading-3', heading_content:
+    collection.title, data_aid: 'collection-title' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_type: 'heading-3',
+    heading_content: collection.title, data_aid: 'collection-title' %}"
+  position: 3079..3222
+{%- endcomment -%}
